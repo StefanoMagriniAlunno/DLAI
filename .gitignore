@@ -1,0 +1,15 @@
+!builds/
+!documents/builds/
+!documents/assets/
+!documents/notebooks/
+
+.python-version
+.venv/
+libs/*
+packages.log
+**/__pycache__/
+.mypy_cache/
+data/
+logs/
+temp/
+scripts/events/history.log
