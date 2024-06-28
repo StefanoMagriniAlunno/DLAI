@@ -26,7 +26,7 @@ Elenco dei pacchetti utili per la repository, è stato generato nel seguente mod
     # usando python3.8.10
     python3 -m venv venv
     source venv/bin/activate
-    pip3 install pip==24.1
+    pip3 install pip==24.1.1
     pip3 install invoke pre-commit pytest jupyter sphinx
     pip3 install flake8 doc8 mypy black autoflake isort shellcheck-py
     pip3 freeze > requirements.txt
