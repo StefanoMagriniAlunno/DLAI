@@ -24,6 +24,7 @@ def install(ctx):
         "matplotlib",
         "plotly",
         "seaborn",
+        "tqdm",
     ]
     for package in packages:
         ctx.run(f"pip install {package}")
