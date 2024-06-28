@@ -45,6 +45,7 @@ deactivate
 make
 
 # aggiungo le cartelle che potrebbero non esserci
+mkdir -p "builds"
 mkdir -p "data"
 mkdir -p "data/out"
 mkdir -p "data/images"
@@ -52,8 +53,8 @@ mkdir -p "data/audios"
 mkdir -p "data/videos"
 mkdir -p "data/db"
 mkdir -p "logs"
-mkdir -p "temp"
 mkdir -p "scripts/events"
+mkdir -p "temp"
 touch "scripts/events/history.log"
 touch "logs/user.log"
 touch "logs/dev.log"

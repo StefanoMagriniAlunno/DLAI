@@ -105,6 +105,8 @@ In **scripts** si possono trovare degli script utili per un corretto uso della r
 
 ### Semplice guida di github per apportare modifiche
 
+Prima di cominciare la propria sessione di modifiche eseguire "git pull". Questo comando può prevenire di modificare codice già non aggiornato. Se tuttavia ci sono già delle modifiche è sconsigliato eseguire questa istruzione.
+
 ~~~bash
 git checkout nome_repository  # utile per cambiare branch
 git branch  # informa l'utente della branch corrente
