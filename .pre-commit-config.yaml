@@ -17,6 +17,7 @@ repos:
     rev: 7.1.0
     hooks:
       - id: flake8
+        args: ['--ignore=E501,W503']
   - repo: 'https://github.com/PyCQA/doc8'
     rev: v1.1.1
     hooks:
