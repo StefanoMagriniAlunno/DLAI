@@ -12,12 +12,10 @@ class Human(Player):
         self.logger.info("Human player created")
 
     def hint(self, word: str) -> str:
-        print("Player: {}".format(self.name))
-        return input("Insert hint for word {}: ".format(word))
+        return input("{} insert HINT for word {}: ".format(self, word))
 
     def answer(self, words: List[str]) -> str:
-        print("Player: {}".format(self.name))
-        return input("Insert answer for words {}: ".format(words))
+        return input("{} insert ANSWER for words {}: ".format(self, words))
 
     def __str__(self):
         return self.name

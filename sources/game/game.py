@@ -51,8 +51,9 @@ class JustOne:
         self.logger.trace("JustOne.__del__")
 
     def __call__(self, n_turns: int) -> Tuple[dict]:
-        # per n_turns:
-        # # pesca una parola W
+        for _ in range(n_turns):
+            # pesca una parola W
+            pass
         # # sceglie un giocatore A (che dovrà indovinare la parola)
         # # hint su tutti gli altri giocatori con la parola W
         # # bot sulle parole per fornire un set finale da dare ad A

@@ -33,14 +33,6 @@ if ! pre-commit install-hooks; then
 fi
 deactivate
 
-# installo i pacchetti dinamici per il progetto
-# shellcheck source=/dev/null
-if ! source .venv/bin/activate && invoke install | tee packages.log; then   # shellcheck disable=SC1091
-    echo "ERROR: An error occurred while installing packages"
-    exit 1
-fi
-deactivate
-
 # preparo builds
 make
 
@@ -61,6 +53,19 @@ touch "logs/dev.log"
 
 mkdir -p "tools"
 mkdir -p "tests"
+
+# installo i pacchetti dinamici per il progetto
+# shellcheck source=/dev/null
+source .venv/bin/activate
+if ! invoke install | tee packages.log; then
+    echo "ERROR: An error occurred while installing packages"
+    exit 1
+fi
+if ! invoke download | tee downloads.log; then
+    echo "ERROR: An error occurred while downloading data"
+    exit 1
+fi
+deactivate
 
 # finish
 python3 assets/finish_install.py
