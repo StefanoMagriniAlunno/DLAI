@@ -3,8 +3,8 @@ import tempfile
 from typing import IO
 
 
-class tmpmng:
-    """tmpmng class
+class Temp:
+    """Temp class
     This class creates a temporary file in the specified directory.
 
     Attributes
@@ -13,13 +13,24 @@ class tmpmng:
 
     Usage
     ---
-        - >> from tmpmng import tmpmng
-        - >> tmpgen = tmpmng()
-        - >> file = tmpgen()
+        >>> from common import Temp
+        >>> tmp = Temp()
+        >>> file = tmp()
     """
 
     def __init__(self, directory: str = "./temp"):
-        print("common | tmpmng :: __init__")
+        """Constructor of the class
+
+        Params
+        ---
+            directory (str, optional):
+                directory with the temporary files. Defaults to "./temp".
+
+        Raises
+        ---
+            FileNotFoundError: directory not found.
+        """
+        print("common | Temp :: __init__")
         if not os.path.exists(directory):
             raise FileNotFoundError(f"Directory '{directory}' not found.")
         self.directory = directory
@@ -29,4 +40,4 @@ class tmpmng:
         return temp_file
 
     def __del__(self):
-        print("common | tmpmng :: __del__")
+        print("common | Temp :: __del__")

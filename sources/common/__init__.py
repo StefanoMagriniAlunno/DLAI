@@ -1,4 +1,4 @@
-from .logger import logger
-from .tmpmng import tmpmng
+from .logger import Logger
+from .temp import Temp
 
-__all__ = ["logger", "tmpmng"]
+__all__ = ["Logger", "Temp"]
