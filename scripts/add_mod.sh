@@ -7,7 +7,7 @@
 #       - module_name: the name of the module to add
 #       - parent_module: the name of the parent module
 #
-#   Note: the library is added to the sources directory
+#   Note: the module is added to the sources directory
 #         as a submodule of the parent module.
 ###############################################################
 
@@ -18,7 +18,7 @@ function show_help {
     echo -e "       - module_name: the name of the module to add"
     echo -e "       - parent_module: the name of the parent module"
     echo -e " "
-    echo -e "   Note: the library is added to the sources directory"
+    echo -e "   Note: the module is added to the sources directory"
     echo -e "         as a submodule of the parent module."
 }
 if [ $# -eq 0 ]; then
