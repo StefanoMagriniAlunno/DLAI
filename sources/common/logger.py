@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import IO
 
 
-class logger:
+class Logger:
     """This class is used to log messages to a file.
     The format of the log message is as follows:
         date time | tag | file_name line_number | message
@@ -42,8 +42,8 @@ class logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
+            - >> from common import Logger
+            - >> log = Logger()
         """
         print("common | logger :: __init__")
         try:
