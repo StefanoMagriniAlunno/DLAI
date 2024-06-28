@@ -1,4 +1,4 @@
 from .logger import Logger
-from .tmpmng import Temp
+from .temp import Temp
 
 __all__ = ["Logger", "Temp"]
