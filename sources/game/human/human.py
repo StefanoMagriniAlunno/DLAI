@@ -9,7 +9,6 @@ class Human(Player):
     def __init__(self, name: str, logger: Logger):
         super().__init__(logger)
         self.name = name
-        self.logger.info("Human player created")
 
     def hint(self, word: str) -> str:
         return input("{} insert HINT for word {}: ".format(self, word))

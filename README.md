@@ -69,6 +69,10 @@ Le fasi di pre-commit servono a tenere sicura la repository da modifiche indegne
 12. **shellcheck** : controlla file shell e bash
 13. **mypy** : verifiche statiche di tipizzazione
 14. **black** : formatta il codice python
+Per eseguire un test al volo senza effettivamente committare, è possibile eseguire:
+~~~bash
+    pre-commit run --all-files
+~~~
 
 ## Directory
 Le cartelle principali di questa repository sono:
