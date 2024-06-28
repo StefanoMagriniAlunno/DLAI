@@ -27,3 +27,16 @@ def install(ctx):
     ]
     for package in packages:
         ctx.run(f"pip install {package}")
+
+@task
+def download(ctx):
+    """Download a file from a URL.
+
+    Usage
+    ---
+        invoke tasks.py download --url https://www.google.com
+    """
+    # lista di URL con destinazione rispetto ./data
+    # url = "https://the/url"
+    # path = "path/to/file"
+    # ctx.run(f"wget {url} -O ./data/{path}")
