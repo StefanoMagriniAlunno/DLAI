@@ -18,3 +18,6 @@ class Human(Player):
     def answer(self, words: List[str]) -> str:
         print("Player: {}".format(self.name))
         return input("Insert answer for words {}: ".format(words))
+
+    def __str__(self):
+        return self.name

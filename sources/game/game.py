@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from common import Logger
 
-from sources.game.player import Player
+from .player import Player
 
 
 class JustOne:
@@ -37,7 +37,7 @@ class JustOne:
         # set del logger
         self.logger = logger
         self.logger.trace("JustOne.__init__")
-        logger.debug("Players: {}".format(players))
+        logger.debug("Players: {}".format([str(player) for player in players]))
 
         # raise
         if len(players) < 2:
@@ -49,7 +49,6 @@ class JustOne:
 
     def __del__(self):
         self.logger.trace("JustOne.__del__")
-        self.logger.info("Game JustOne ended")
 
     def __call__(self, n_turns: int) -> Tuple[dict]:
         # per n_turns:

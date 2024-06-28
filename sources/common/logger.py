@@ -7,7 +7,7 @@ from typing import IO
 class Logger:
     """This class is used to log messages to a file.
     The format of the log message is as follows:
-        date time | tag | file_name line_number | message
+        date time | tag | file_name line_number :: message
 
     Attributes
     ---
@@ -27,7 +27,7 @@ class Logger:
     """
 
     def __init__(self, user: str = "logs/user.log", dev: str = "logs/dev.log"):
-        """This function initializes the logger class.
+        """This function initializes the Logger class.
 
         Params
         ---
@@ -42,10 +42,10 @@ class Logger:
 
         Usage
         ---
-            - >> from common import Logger
-            - >> log = Logger()
+            >>> from common import Logger
+            >>> log = Logger()
         """
-        print("common | logger :: __init__")
+        print("common | Logger :: __init__")
         try:
             self.user: IO[str] = open(user, "w")
             self.dev: IO[str] = open(dev, "w")
@@ -66,8 +66,8 @@ class Logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
+            - >> from common import Logger
+            - >> log = Logger()
             - >> log.trace('This is a trace message')
         """
         # frame delle chiamate
@@ -81,7 +81,7 @@ class Logger:
         try:
             self.dev.write(
                 f"{datetime.now()} | TRACE {eyes_char}  | "
-                + f"{file_name} {line_no} | {message}\n"
+                + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
             print(e)
@@ -99,9 +99,9 @@ class Logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
-            - >> log.debug('This is a debug message')
+            >>> from common import Logger
+            >>> log = Logger()
+            >>> log.debug('This is a debug message')
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -110,11 +110,11 @@ class Logger:
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
-        bug_symbol = "\U0001F41B"
+        stethoscope_symbol = "\U0001FA7A"
         try:
             self.dev.write(
-                f"{datetime.now()} | DEBUG {bug_symbol}  | "
-                + f"{file_name} {line_no} | {message}\n"
+                f"{datetime.now()} | DEBUG {stethoscope_symbol}  | "
+                + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
             print(e)
@@ -132,9 +132,9 @@ class Logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
-            - >> log.fatal('This is a fatal message')
+            >>> from common import Logger
+            >>> log = Logger()
+            >>> log.fatal('This is a fatal message')
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -147,7 +147,7 @@ class Logger:
         try:
             self.dev.write(
                 f"{datetime.now()} | FATAL {collision_symbol}  | "
-                + f"{file_name} {line_no} | {message}\n"
+                + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
             print(e)
@@ -165,9 +165,9 @@ class Logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
-            - >> log.info('This is an info message')
+            >>> from common import Logger
+            >>> log = Logger()
+            >>> log.info('This is an info message')
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -180,7 +180,7 @@ class Logger:
         try:
             self.user.write(
                 f"{datetime.now()} | INFO  {eyes_symbol}  | "
-                + f"{file_name} {line_no} | {message}\n"
+                + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
             print(e)
@@ -198,9 +198,9 @@ class Logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
-            - >> log.warning('This is a warning message')
+            >>> from common import Logger
+            >>> log = Logger()
+            >>> log.warning('This is a warning message')
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -213,7 +213,7 @@ class Logger:
         try:
             self.user.write(
                 f"{datetime.now()} | WARN  {bell_symbol}  | "
-                + f"{file_name} {line_no} | {message}\n"
+                + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
             print(e)
@@ -231,9 +231,9 @@ class Logger:
 
         Usage
         ---
-            - >> from logger import logger
-            - >> log = logger()
-            - >> log.error('This is an error message')
+            >>> from common import Logger
+            >>> log = Logger()
+            >>> log.error('This is an error message')
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -246,12 +246,12 @@ class Logger:
         try:
             self.user.write(
                 f"{datetime.now()} | ERROR {collision_symbol}  | "
-                + f"{file_name} {line_no} | {message}\n"
+                + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
             print(e)
 
     def __del__(self):
-        print("common | logger :: __del__")
+        print("common | Logger :: __del__")
         self.user.close()
         self.dev.close()

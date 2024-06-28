@@ -2,11 +2,12 @@
 
 from common import Logger
 from game import JustOne
+from game.human import Human
 
 
 def main(logger: Logger):
     try:
-        JustOne([], logger)
+        JustOne([Human("Alice", logger), Human("Bob", logger)], logger)
     except TypeError as e:
         logger.fatal(e)
         return

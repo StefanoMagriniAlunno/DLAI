@@ -15,9 +15,13 @@ class Player(ABC):
         self.logger.trace("Player.__del__")
 
     @abstractmethod
+    def __str__(self):
+        raise NotImplementedError
+
+    @abstractmethod
     def hint(self, word: str) -> str:
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def answer(self, words: List[str]) -> str:
-        pass
+        raise NotImplementedError
