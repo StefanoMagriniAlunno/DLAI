@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # aggiorno pip a 24.1
-if ! pip install --upgrade pip==24.1 --no-warn-script-location; then
+if ! pip install --upgrade pip==24.1.1 --no-warn-script-location; then
     echo "ERROR: An error occurred while installing pip24.1"
     exit 1
 fi
