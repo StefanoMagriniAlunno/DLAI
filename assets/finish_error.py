@@ -1,5 +1,5 @@
-BrokenHeart_symbol = u"\U0001F494"
-collision_symbol = u"\U0001F4A5"
+BrokenHeart_symbol = "\U0001F494"
+collision_symbol = "\U0001F4A5"
 bold_start = "\033[1m"
 bold_end = "\033[0m"
 print(

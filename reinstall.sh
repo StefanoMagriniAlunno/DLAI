@@ -16,6 +16,9 @@ fi
 
 # ripeto l'installazione
 echo -e "\e[35mInstall repo with path $python_path, wait a few minutes...\e[0m"
-./install.sh "$python_path"
+if ! ./install.sh "$python_path"; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while reinstalling the repository"
+    exit 1
+fi
 
-exit 1
+exit 0

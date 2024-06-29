@@ -1,5 +1,5 @@
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
-  "python.terminal.activateEnvironment": true,
   "python.analysis.autoIndent": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python3",
+  "python.terminal.activateEnvironment": true
 }

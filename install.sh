@@ -92,9 +92,11 @@ echo -e "\e[32mSUCCESS\e[0m: custom packages installed"
 # preparo builds
 make --silent
 
+# controllo la repository
+.venv/bin/pre-commit run --all-files
+
 # finish
 .venv/bin/python3 assets/finish_install.py
-exit 1
 echo "You can now run the project with:"
 echo "Please, activate the environment:"
 echo "    source .venv/bin/activate"
