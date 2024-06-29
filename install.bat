@@ -45,14 +45,14 @@ if errorlevel 1 (
     exit /b 1
 )
 
-.venv\Scripts\pre-commit.exe install --quiet
+.venv\Scripts\pre-commit.exe install > NUL
 if errorlevel 1 (
     echo ERROR: An error occurred while installing pre-commit-config.yaml
     .venv\Scripts\python.exe assets/finish_error.py
     exit /b 1
 )
 
-.venv\Scripts\pre-commit.exe install-hooks --quiet
+.venv\Scripts\pre-commit.exe install-hooks > NUL
 if errorlevel 1 (
     echo ERROR: An error occurred while installing hooks
     .venv\Scripts\python.exe assets/finish_error.py
