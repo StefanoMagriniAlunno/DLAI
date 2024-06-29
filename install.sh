@@ -63,6 +63,7 @@ mkdir -p "data/videos"
 mkdir -p "data/db"
 mkdir -p "libs"
 mkdir -p "logs"
+mkdir -p "scripts"
 mkdir -p "scripts/events"
 mkdir -p "temp"
 touch "scripts/events/history.log"
@@ -91,6 +92,9 @@ echo -e "\e[32mSUCCESS\e[0m: custom packages installed"
 
 # preparo builds
 make --silent
+
+# copio il supporto di scripting, quindi tutti i file in templates/_scripts_unix li metto in scripts
+cp -r templates/_scripts_unix/. scripts/
 
 # controllo la repository
 .venv/bin/pre-commit run --all-files

@@ -60,7 +60,7 @@ if errorlevel 1 (
 )
 
 REM Aggiungo le cartelle che potrebbero non esserci
-md builds data data\out data\images data\audios data\videos data\db libs logs scripts\events temp tools tests
+md builds data data\out data\images data\audios data\videos data\db libs logs scripts scripts\events temp tools tests
 type nul > scripts\events\history.log
 type nul > logs\user.log
 type nul > logs\dev.log
@@ -87,6 +87,9 @@ echo SUCCESS: custom packages installed
 
 REM Preparo builds
 make --silent
+
+REM Preparo scripts
+xcopy templates\_scripts_windows\* scripts\ /s /e /y
 
 REM Controllo la repository
 .venv\Scripts\pre-commit.exe run --all-files
