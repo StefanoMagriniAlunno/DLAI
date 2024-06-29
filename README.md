@@ -141,10 +141,10 @@ Le funzionalità base della repository sono custodite nel modulo **common**
 ### logger
 
 logger è il modulo della repository che gestisce i log del progetto, produce due tipi di log: *user.log* e *dev.log*.
-Inoltre è possibile fornire proprie directory e quindi creare log che non verranno sovrascritti.
+Questi file devono già esistere, inoltre è possibile fornire proprie directory e quindi creare log che non verranno sovrascritti.
 
 <img src="assets/log_policy.png" title="Schema policy di log" style="zoom:100%;" />
 
-### temp
+### tmpmng
 
-temp è il modulo della repository che gestisce i file temporanei del progetto.
+tmpmng è il modulo della repository che gestisce i file temporanei del progetto.
