@@ -7,14 +7,9 @@ from invoke import task
 def install(ctx):
     """Installa più pacchetti definiti in una lista."""
     packages = [
-        "torch torchvision torchaudio",
-        "numpy",
-        "pandas",
-        "scipy",
-        "scikit-learn",
-        "matplotlib",
-        "plotly",
-        "seaborn",
+        # "package1",
+        # "package2",
+        # "package3",
     ]
     for package in packages:
         ctx.run(f".venv/bin/python3 -m pip install {package}")
