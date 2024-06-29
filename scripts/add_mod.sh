@@ -37,7 +37,8 @@ PARENT_MODULE=$2
 
 # cerco la directory sources/{PARENT_MODULE} e se non esiste lancio un'eccezione
 if [ ! -d "sources/$PARENT_MODULE" ]; then
-    echo "ERROR: sources/$PARENT_MODULE not found."
+    echo -e "\e[31mERROR\e[0m: sources/$PARENT_MODULE not found."
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
@@ -45,25 +46,29 @@ fi
 if [ ! -d "sources/$PARENT_MODULE/$MODULE" ]; then
     # prendo da templates la directory _sources e la copio in sources/{PARENT_MODULE}
     if ! cp -r templates/_sources sources/"$PARENT_MODULE" ; then
-        echo "ERROR: An error occurred while copying the directory _sources to sources/$PARENT_MODULE."
+        echo -e "\e[31mERROR\e[0m: An error occurred while copying the directory _sources to sources/$PARENT_MODULE."
+        .venv/bin/python3 assets/finish_error.py
         exit 1
     fi
     # rinomino la cartella _sources in {MODULE}
     if ! mv sources/"$PARENT_MODULE"/_sources sources/"$PARENT_MODULE"/"$MODULE" ; then
-        echo "ERROR: An error occurred while renaming the directory example to $MODULE."
+        echo -e "\e[31mERROR\e[0m: An error occurred while renaming the directory example to $MODULE."
+        .venv/bin/python3 assets/finish_error.py
         exit 1
     fi
     # se $MODULE è diverso da example:
     if [ "$MODULE" != "example" ]; then
         # cambio nome al file example.py in {MODULE}.py
         if ! mv sources/"$PARENT_MODULE"/"$MODULE"/example.py sources/"$PARENT_MODULE"/"$MODULE"/"$MODULE".py ; then
-            echo "ERROR: An error occurred while renaming the file example.py to $MODULE.py."
+            echo -e "\e[31mERROR\e[0m: An error occurred while renaming the file example.py to $MODULE.py."
+            .venv/bin/python3 assets/finish_error.py
             exit 1
         fi
         # cambio il nome del modulo usato in __init__.py
         # sostituisco l'espressione example in {MODULE}
         if ! sed -i s/example/"$MODULE"/g sources/"$PARENT_MODULE"/"$MODULE"/__init__.py ; then
-            echo "ERROR: An error occurred while renaming the module in __init__.py."
+            echo -e "\e[31mERROR\e[0m: An error occurred while renaming the module in __init__.py."
+            .venv/bin/python3 assets/finish_error.py
             exit 1
         fi
     fi
@@ -72,6 +77,6 @@ fi
 # riporto in scripts/events/history.log il comando eseguito
 echo "add mod $MODULE to $PARENT_MODULE" >> scripts/events/history.log
 
-python3 assets/finish_scripts.py
+.venv/bin/python3 assets/finish_scripts.py
 
 echo "Module $MODULE added successfully"
