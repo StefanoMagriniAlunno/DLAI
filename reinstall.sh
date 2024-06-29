@@ -18,4 +18,4 @@ fi
 echo -e "\e[35mInstall repo with path $python_path, wait a few minutes...\e[0m"
 ./install.sh "$python_path"
 
-exit 0
+exit 1
