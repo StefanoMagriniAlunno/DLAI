@@ -2,6 +2,9 @@
 
 # Inizializza le variabili
 python_cmd="python3"
+pip_version="24.1.1"  # usato sia dall'utente per installare virtualenv, sia dall'ambiente stesso per installare i pacchetti
+virtualenv_version="20.26.3"
+
 
 # Controlla se è stato fornito un argomento
 if [ $# -eq 1 ]; then
@@ -9,36 +12,44 @@ if [ $# -eq 1 ]; then
     python_cmd="$1"/bin/python3
 fi
 
-# aggiorno pip a 24.1.1
-if ! "$python_cmd" -m pip install --upgrade pip==24.1.1 --no-warn-script-location; then
-    echo "ERROR: An error occurred while installing pip24.1.1"
+# aggiorno pip a $pip_version
+if ! "$python_cmd" -m pip install --upgrade pip=="$pip_version" --no-warn-script-location > /dev/null 2>&1; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while installing pip$pip_version"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
-# installo con pip virtualenv
-if ! "$python_cmd" -m pip install --user virtualenv==20.26.3 --no-warn-script-location; then
-    echo "ERROR: An error occurred while installing virtualenv20.26.3"
+# installo con pip virtualenv $virtualenv_version
+if ! "$python_cmd" -m pip install --user virtualenv=="$virtualenv_version" --no-warn-script-location > /dev/null 2>&1; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while installing virtualenv$virtualenv_version"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
 # inizializzo la repository
-if ! "$python_cmd" -m virtualenv .venv; then
-    echo "ERROR: An error occurred while creating .venv"
+if ! "$python_cmd" -m virtualenv .venv --pip="$pip_version"; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while creating .venv"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
+
+echo -e "\e[32mSUCCESS\e[0m: environment created"
+echo -e "\e[35mInstalling base package, wait a few minutes...\e[0m"
 
 # cambio il path di python3
-
-if ! .venv/bin/python3 -m pip install -r requirements.txt; then
-    echo "ERROR: An error occurred while installing requirements.txt"
+if ! .venv/bin/python3 -m pip install -r requirements.txt --quiet; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while installing requirements.txt"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
-if ! .venv/bin/pre-commit install; then
-    echo "ERROR: An error occurred while installing pre-commit-config.yaml"
+if ! .venv/bin/pre-commit install > /dev/null 2>&1; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while installing pre-commit-config.yaml"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
-if ! .venv/bin/pre-commit install-hooks; then
-    echo "ERROR: An error occurred while installing hooks"
+if ! .venv/bin/pre-commit install-hooks > /dev/null 2>&1; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while installing hooks"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
@@ -61,18 +72,25 @@ touch "logs/dev.log"
 mkdir -p "tools"
 mkdir -p "tests"
 
-# preparo builds
-make
+
+echo -e "\e[32mSUCCESS\e[0m: base package installed"
+echo -e "\e[35mInstalling custom packages, wait a few minutes...\e[0m"
 
 # installo i pacchetti dinamici per il progetto
-if ! .venv/bin/invoke install | tee packages.log; then
-    echo "ERROR: An error occurred while installing packages"
+if ! .venv/bin/invoke install > packages.log; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while installing packages"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
-if ! .venv/bin/invoke download | tee downloads.log; then
-    echo "ERROR: An error occurred while downloading data"
+if ! .venv/bin/invoke download > downloads.log; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while downloading data"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
+echo -e "\e[32mSUCCESS\e[0m: custom packages installed"
+
+# preparo builds
+make --silent
 
 # finish
 .venv/bin/python3 assets/finish_install.py

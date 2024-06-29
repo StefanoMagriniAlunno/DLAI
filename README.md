@@ -19,6 +19,10 @@ La repository suppone l'uso di python3.8.10
 **install.sh**
 Questo file script bash permette di installare automaticamente i pacchetti utili per la repository e per il programma.
 Farà uso dei file "requirements.txt" e tasks.py per conoscere quali pacchetti installare.
+E' necessario specificare il percorso del linguaggio python che si vuole usare qualora non fosse quello di sistema, ad esempio:
+~~~bash
+    ./install.sh /home/stefano/.pyenv/version/3.8.10
+~~~
 
 **requirements.txt**
 Elenco dei pacchetti utili per la repository, è stato generato nel seguente modo
@@ -50,7 +54,7 @@ Questo script di python è incaricato nella costruzione automatica della reposit
 Questo script permette di reinstallare la repository, servirà abbandonare l'ambiente prima di eseguire lo script:
 ~~~bash
     deactivate
-    ./reinstall.sh
+    ./reinstall.sh /home/stefano/.pyenv/version/3.8.10
 ~~~
 
 ## pre-commit

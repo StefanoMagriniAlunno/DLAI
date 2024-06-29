@@ -39,7 +39,8 @@ LIBRARY_NAME=$1
 if [ ! -d "builds/$LIBRARY_NAME" ]; then
     # creo una copia della directory templates/_builds in builds chiamata $LIBRARY_NAME (invece di _builds)
     if ! cp -r templates/_builds builds/"$LIBRARY_NAME"; then
-        echo "ERROR: An error occurred while copying the directory templates/_builds to builds/$LIBRARY_NAME"
+        echo -e "\e[31mERROR\e[0m: An error occurred while copying the directory templates/_builds to builds/$LIBRARY_NAME"
+        .venv/bin/python3 assets/finish_error.py
         exit 1
     fi
 fi
@@ -53,17 +54,21 @@ if ! grep -q "make -C builds/$LIBRARY_NAME build" "makefile"; then
 fi
 
 if ! make -C builds/"$LIBRARY_NAME" build -s; then
-    echo "ERROR: An error occurred while building the library $LIBRARY_NAME"
+    echo -e "\e[31mERROR\e[0m: An error occurred while building the library $LIBRARY_NAME"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 if ! mv builds/"$LIBRARY_NAME"/local_lib.so libs/"$LIBRARY_NAME".so; then
-    echo "ERROR: An error occurred while moving the library $LIBRARY_NAME.so to libs"
+    echo -e "\e[31mERROR\e[0m: An error occurred while moving the library $LIBRARY_NAME.so to libs"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
 # riporto in scripts/events/history.log il comando eseguito
 echo "add lib $LIBRARY_NAME" >> scripts/events/history.log
 
-python3 assets/finish_scripts.py
+.venv/bin/python3 assets/finish_scripts.py
 
 echo "Library $LIBRARY_NAME built successfully"
+
+exit 0

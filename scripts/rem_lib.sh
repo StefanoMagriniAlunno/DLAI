@@ -37,7 +37,8 @@ LIBRARY_NAME=$1
 
 # rimuovo la cartella builds/$LIBRARY_NAME
 if ! rm -rf builds/"$LIBRARY_NAME"; then
-    echo "ERROR: An error occurred while removing the directory builds/$LIBRARY_NAME"
+    echo -e "\e[31mERROR\e[0m: An error occurred while removing the directory builds/$LIBRARY_NAME"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
@@ -46,23 +47,28 @@ fi
 # mv builds/prova/local_lib.so libs/prova.so
 # da makefile
 if ! sed -i "/make -C builds\/$LIBRARY_NAME build/d" makefile; then
-    echo "ERROR: An error occurred while removing make -C builds/$LIBRARY_NAME build from makefile"
+    echo -e "\e[31mERROR\e[0m: An error occurred while removing make -C builds/$LIBRARY_NAME build from makefile"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 if ! sed -i "/mv builds\/$LIBRARY_NAME\/local_lib.so libs\/$LIBRARY_NAME.so/d" makefile; then
-    echo "ERROR: An error occurred while removing mv builds/$LIBRARY_NAME/local_lib.so libs/$LIBRARY_NAME.so from makefile"
+    echo -e "\e[31mERROR\e[0m: An error occurred while removing mv builds/$LIBRARY_NAME/local_lib.so libs/$LIBRARY_NAME.so from makefile"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
 # rimuovo la libreria da libs
 if ! rm -f libs/"$LIBRARY_NAME".so; then
-    echo "ERROR: An error occurred while removing the library $LIBRARY_NAME.so from libs"
+    echo -e "\e[31mERROR\e[0m: An error occurred while removing the library $LIBRARY_NAME.so from libs"
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
 # riporto in scripts/events/history.log il comando eseguito
 echo "rem lib $LIBRARY_NAME" >> scripts/events/history.log
 
-python3 assets/finish_scripts.py
+.venv/bin/python3 assets/finish_scripts.py
 
 echo "Library $LIBRARY_NAME removed successfully"
+
+exit 0

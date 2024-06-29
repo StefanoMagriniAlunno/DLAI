@@ -32,19 +32,23 @@ MODULE_PATH=$1
 
 # Se il modulo non esiste in sources lancio un'eccezione
 if [ ! -d "sources/$MODULE_PATH" ]; then
-    echo "ERROR: sources/$MODULE_PATH not found."
+    echo -e "\e[31mERROR\e[0m: sources/$MODULE_PATH not found."
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
 # Rimuovo il modulo
 if ! rm -rf sources/"$MODULE_PATH"; then
-    echo "ERROR: An error occurred while removing the module from sources."
+    echo -e "\e[31mERROR\e[0m: An error occurred while removing the module from sources."
+    .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
 
 # riporto in scripts/events/history.log il comando eseguito
 echo "rem mod $MODULE_PATH" >> scripts/events/history.log
 
-python3 assets/finish_scripts.py
+.venv/bin/python3 assets/finish_scripts.py
 
 echo "Module $MODULE_PATH removed successfully"
+
+exit 0

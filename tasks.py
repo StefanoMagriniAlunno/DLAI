@@ -5,12 +5,7 @@ from invoke import task
 
 @task
 def install(ctx):
-    """Installa più pacchetti definiti in una lista.
-
-    Usage
-    ---1
-        invoke tasks.py install
-    """
+    """Installa più pacchetti definiti in una lista."""
     packages = [
         "torch torchvision torchaudio",
         "numpy",
@@ -22,17 +17,12 @@ def install(ctx):
         "seaborn",
     ]
     for package in packages:
-        ctx.run(f"pip install {package}")
+        ctx.run(f".venv/bin/python3 -m pip install {package}")
 
 
 @task
 def download(ctx):
-    """Download a file from a URL.
-
-    Usage
-    ---
-        invoke tasks.py download --url https://www.google.com
-    """
+    """Download a file from a URL."""
     # lista di URL con destinazione rispetto ./data
     url = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
     path = "db/words_alpha.txt"

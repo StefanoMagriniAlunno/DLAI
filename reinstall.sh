@@ -10,12 +10,15 @@ fi
 
 # elimino la vecchia cartella .venv
 if ! rm -rf .venv; then
-    echo "ERROR: An error occurred while removing .venv"
+    echo -e "\e[31mERROR\e[0m: An error occurred while removing .venv"
     exit 1
 fi
 
-# ripeto l'instal1lazione
+# ripeto l'installazione
+echo -e "\e[35mInstall repo with path $python_path, wait a few minutes...\e[0m"
 if ! ./install.sh "$python_path"; then
-    echo "ERROR: An error occurred while installing"
+    echo -e "\e[31mERROR\e[0m: An error occurred while reinstalling the repository"
     exit 1
 fi
+
+exit 0
