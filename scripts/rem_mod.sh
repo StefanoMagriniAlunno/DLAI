@@ -50,3 +50,5 @@ echo "rem mod $MODULE_PATH" >> scripts/events/history.log
 .venv/bin/python3 assets/finish_scripts.py
 
 echo "Module $MODULE_PATH removed successfully"
+
+exit 0
