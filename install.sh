@@ -34,7 +34,7 @@ if ! "$python_cmd" -m virtualenv .venv --pip="$pip_version"; then
 fi
 
 echo -e "\e[32mSUCCESS\e[0m: environment is ready"
-echo -e "\e[35mInstalling repository packages, wait a few minutes...\e[0m"
+echo -e "\e[35mInstalling base package, wait a few minutes...\e[0m"
 
 # cambio il path di python3
 if ! .venv/bin/python3 -m pip install -r requirements.txt --quiet; then
@@ -72,11 +72,9 @@ touch "logs/dev.log"
 mkdir -p "tools"
 mkdir -p "tests"
 
-# preparo builds
-make --silent
 
-echo -e "\e[32mSUCCESS\e[0m: Repository is ready"
-echo -e "\e[35mInstalling software packages, wait a few minutes...\e[0m"
+echo -e "\e[32mSUCCESS\e[0m: base package is installed"
+echo -e "\e[35mInstalling custom packages, wait a few minutes...\e[0m"
 
 # installo i pacchetti dinamici per il progetto
 if ! .venv/bin/invoke install > packages.log; then
@@ -89,6 +87,9 @@ if ! .venv/bin/invoke download > downloads.log; then
     .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
+
+# preparo builds
+make --silent
 
 # finish
 .venv/bin/python3 assets/finish_install.py
