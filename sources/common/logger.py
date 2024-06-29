@@ -111,10 +111,10 @@ class Logger:
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
-        bug_symbol = "\U0001F41B"
+        stethoscope_symbol = "\U0001FA7A"
         try:
             self.dev.write(
-                f"{datetime.now()} | DEBUG {bug_symbol}  | "
+                f"{datetime.now()} | DEBUG {stethoscope_symbol}  | "
                 + f"{file_name} {line_no} :: {message}\n"
             )
         except Exception as e:
