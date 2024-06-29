@@ -78,12 +78,12 @@ echo -e "\e[32mSUCCESS\e[0m: base package installed"
 echo -e "\e[35mInstalling custom packages, wait a few minutes...\e[0m"
 
 # installo i pacchetti dinamici per il progetto
-if ! .venv/bin/invoke install > packages.log; then
+if ! .venv/bin/invoke install --unix-like > packages.log; then
     echo -e "\e[31mERROR\e[0m: An error occurred while installing packages"
     .venv/bin/python3 assets/finish_error.py
     exit 1
 fi
-if ! .venv/bin/invoke download > downloads.log; then
+if ! .venv/bin/invoke download --unix-like > downloads.log; then
     echo -e "\e[31mERROR\e[0m: An error occurred while downloading data"
     .venv/bin/python3 assets/finish_error.py
     exit 1

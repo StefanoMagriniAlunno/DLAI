@@ -4,7 +4,7 @@ from invoke import task  # type: ignore
 
 
 @task
-def install(ctx):
+def install(ctx, unix_like=False):
     """Installa più pacchetti definiti in una lista."""
     # NOTE: lista di pacchetti da installare
     # packages = [
@@ -14,14 +14,25 @@ def install(ctx):
     # ]
     packages = []
     for package in packages:
-        ctx.run(f".venv/bin/python3 -m pip install {package}")
+        if unix_like:
+            # Unix-like system
+            ctx.run(f".venv/bin/python3 -m pip install {package}")
+        else:
+            # Windows system
+            ctx.run(f".venv\Scripts\python.exe -m pip install {package}")
 
 
 @task
-def download(ctx):
+def download(ctx, unix_like=False):
     """Download a file from a URL."""
-    # NOTE: lista di url da scaricare
-    # url = "https://example.com/file.txt"
-    # path = "path/to/file.txt"
-    # ctx.run(f"wget {url} -O ./data/{path}")
-    # ...
+    # url = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
+    # path = "db/words_alpha.txt"
+    #
+    # if unix_like:
+    #     # Unix-like system
+    #     ctx.run(f"curl -o ./data/{path} {url}")
+    # else:
+    #     # Windows system
+    #     ctx.run(
+    #         f"powershell -Command (New-Object Net.WebClient).DownloadFile('{url}', './data/{path}')"
+    #     )
