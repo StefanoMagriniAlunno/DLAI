@@ -1,19 +1,11 @@
+# flake8: noqa
+
 from invoke import task
 
 
 @task
 def install(ctx):
     """Installa più pacchetti definiti in una lista.
-    Parameters
-        - **ctx**: contesto
-    Usage
-        ~~~bash
-            invoke tasks.py
-        ~~~
-        oppure
-        ~~~python3
-            install(ctx)
-        ~~~
     """
     packages = [
         "torch torchvision torchaudio",
@@ -28,15 +20,12 @@ def install(ctx):
     for package in packages:
         ctx.run(f".venv/bin/python3 -m pip install {package}")
 
+
 @task
 def download(ctx):
     """Download a file from a URL.
-
-    Usage
-    ---
-        invoke tasks.py download --url https://www.google.com
     """
     # lista di URL con destinazione rispetto ./data
-    # url = "https://the/url"
-    # path = "path/to/file"
-    # ctx.run(f"wget {url} -O ./data/{path}")
+    # url = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
+    # path = "db/words_alpha.txt"
+    # ctx.run(f'wget {url} -O ./data/{path}')
