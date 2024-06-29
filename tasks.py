@@ -26,7 +26,7 @@ def install(ctx):
         "seaborn",
     ]
     for package in packages:
-        ctx.run(f"pip install {package}")
+        ctx.run(f".venv/bin/python3 -m pip install {package}")
 
 @task
 def download(ctx):
