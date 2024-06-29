@@ -19,6 +19,10 @@ La repository suppone l'uso di python3.8.10
 **install.sh**
 Questo file script bash permette di installare automaticamente i pacchetti utili per la repository e per il programma.
 Farà uso dei file "requirements.txt" e tasks.py per conoscere quali pacchetti installare.
+E' necessario specificare il percorso del linguaggio python che si vuole usare qualora non fosse quello di sistema, ad esempio:
+~~~bash
+    ./install.sh /home/stefano/.pyenv/version/3.8.10
+~~~
 
 **requirements.txt**
 Elenco dei pacchetti utili per la repository, è stato generato nel seguente modo
@@ -50,7 +54,7 @@ Questo script di python è incaricato nella costruzione automatica della reposit
 Questo script permette di reinstallare la repository, servirà abbandonare l'ambiente prima di eseguire lo script:
 ~~~bash
     deactivate
-    ./reinstall.sh
+    ./reinstall.sh /home/stefano/.pyenv/version/3.8.10
 ~~~
 
 ## pre-commit
@@ -69,6 +73,10 @@ Le fasi di pre-commit servono a tenere sicura la repository da modifiche indegne
 12. **shellcheck** : controlla file shell e bash
 13. **mypy** : verifiche statiche di tipizzazione
 14. **black** : formatta il codice python
+Per eseguire un test al volo senza effettivamente committare, è possibile eseguire:
+~~~bash
+    pre-commit run --all-files
+~~~
 
 ## Directory
 Le cartelle principali di questa repository sono:
@@ -133,10 +141,10 @@ Le funzionalità base della repository sono custodite nel modulo **common**
 ### logger
 
 logger è il modulo della repository che gestisce i log del progetto, produce due tipi di log: *user.log* e *dev.log*.
-Questi file devono già esistere, inoltre è possibile fornire proprie directory e quindi creare log che non verranno sovrascritti.
+Inoltre è possibile fornire proprie directory e quindi creare log che non verranno sovrascritti.
 
 <img src="assets/log_policy.png" title="Schema policy di log" style="zoom:100%;" />
 
-### tmpmng
+### temp
 
-tmpmng è il modulo della repository che gestisce i file temporanei del progetto.
+temp è il modulo della repository che gestisce i file temporanei del progetto.
