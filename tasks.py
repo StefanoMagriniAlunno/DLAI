@@ -1,15 +1,25 @@
 # flake8: noqa
 
-from invoke import task
+from invoke import task  # type: ignore
 
 
 @task
 def install(ctx):
     """Installa più pacchetti definiti in una lista."""
+    # NOTE: lista di pacchetti da installare
+    # packages = [
+    #     "pacchetto1",
+    #     "pacchetto2 pacchetto3",
+    #     ...
+    # ]
     packages = [
-        # "package1",
-        # "package2",
-        # "package3",
+        "numpy",
+        "pandas plotly",
+        "matplotlib",
+        "seaborn",
+        "scikit-learn",
+        "torch torchvision torchaudio",
+        "nltk",
     ]
     for package in packages:
         ctx.run(f".venv/bin/python3 -m pip install {package}")
@@ -18,7 +28,11 @@ def install(ctx):
 @task
 def download(ctx):
     """Download a file from a URL."""
-    # lista di URL con destinazione rispetto ./data
+    # NOTE: lista di url da scaricare
+    # url = "https://example.com/file.txt"
+    # path = "path/to/file.txt"
+    # ctx.run(f"wget {url} -O ./data/{path}")
+    # ...
     url = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
     path = "db/words_alpha.txt"
     ctx.run(f"wget {url} -O ./data/{path}")
