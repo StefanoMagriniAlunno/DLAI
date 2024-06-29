@@ -80,3 +80,5 @@ echo "add mod $MODULE to $PARENT_MODULE" >> scripts/events/history.log
 .venv/bin/python3 assets/finish_scripts.py
 
 echo "Module $MODULE added successfully"
+
+exit 0
