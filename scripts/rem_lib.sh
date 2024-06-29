@@ -70,3 +70,5 @@ echo "rem lib $LIBRARY_NAME" >> scripts/events/history.log
 .venv/bin/python3 assets/finish_scripts.py
 
 echo "Library $LIBRARY_NAME removed successfully"
+
+exit 0
