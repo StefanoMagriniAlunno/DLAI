@@ -78,25 +78,6 @@ Per eseguire un test al volo senza effettivamente committare, è possibile esegu
     pre-commit run --all-files
 ~~~
 
-## Directory
-Le cartelle principali di questa repository sono:
-**documents**: documentazione
-**scripts**: script della repository (per una corretta gestione)
-**source**: codice sorgente
-**builds**: build per le librerie in fase di installazione (**libs** custodisce le librerie)
-**templates**: formati base di file usati da scripts e documents
-
-### Directory ignorate
-Le directory ignorate sono quelle che possono servire localmente e sono:
-**data**: container di eventuali input e output
-**logs**: log desiderato per i moduli
-**temp**: file temporanei generati durante l'esecuzione del codice ed eliminabili
-
-### Cartelle non ignorate
-**tests**: ambiente per preparare test per il codice
-**tools**: programmi utili per la progettazione, ma scollegati con il resto del codice
-
-
 ## Uso della repository
 
 ### script ausiliari
