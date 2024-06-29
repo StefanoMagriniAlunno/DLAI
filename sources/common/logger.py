@@ -1,5 +1,6 @@
 # This file contains the logger class, which is used to log messages to a file.
 import inspect
+from abc import ABC
 from datetime import datetime
 from typing import IO
 
@@ -255,3 +256,20 @@ class Logger:
         print("common | Logger :: __del__")
         self.user.close()
         self.dev.close()
+
+
+class LoggerSupport(ABC):
+    """This class is used as a support for the logger.
+
+    Attributes
+    ---
+        - logger (Logger): The logger object.
+
+    """
+
+    def __init__(self, logger: Logger):
+        self.logger = logger
+        logger.trace(f"{self.__class__.__name__}.__init__")
+
+    def __del__(self):
+        self.logger.trace(f"{self.__class__.__name__}.__del__")
