@@ -30,5 +30,5 @@ if __name__ == "__main__":
         main(log)
     except FileNotFoundError:
         print("Error opening files.")
-
-    del log
+    finally:
+        del log
