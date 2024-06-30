@@ -1,131 +1,131 @@
 # DLAI
 
-## Come installare questa repository
+## How to install the repository
 
-La repository suppone l'uso di python3.8.10
+### Prerequisites
+
+- **Operative system**: Linux Ubuntu 20.04 LTS (Focal Fossa) or 22.04 LTS (Jammy Jellyfish)
+- **Python3**: 3.8.10, with **pip3**
+- **git-all**: installed
+- **pytest**: recommended
+
+No administrator privileges needed.
+
+### Install the repository
+
+- Find the path of the python3 command (for example: "/usr/bin/python3")
+- Download the repository in the current directory:
 ~~~bash
-    # mettersi nella directory dove si vuole scaricare la cartella con dentro la repository
-    git clone https://github.com/StefanoMagriniAlunno/DLAI  # sarà necessario autenticarsi
-    cd DLAI  # entrare nella cartella
-    # settare la branch interessata, ad esempio:
-    git checkout just-one
-    git branch  # verificare che sia corretta la branch
-    # installare il software e seguire le sue indicazioni
-    ./install.sh
+    git clone https://github.com/StefanoMagriniAlunno/DLAI
+    cd DLAI
 ~~~
-
-## Contenuti base per la repository
-
-**install.sh**
-Questo file script bash permette di installare automaticamente i pacchetti utili per la repository e per il programma.
-Farà uso dei file "requirements.txt" e tasks.py per conoscere quali pacchetti installare.
-E' necessario specificare il percorso del linguaggio python che si vuole usare qualora non fosse quello di sistema, ad esempio:
+- Set the current branch and install:
 ~~~bash
-    ./install.sh /home/stefano/.pyenv/version/3.8.10
+    git checkout your_branch
+    ./install.sh /path/of/python3.8.10
 ~~~
+It took longer than expected. ☕
 
-**requirements.txt**
-Elenco dei pacchetti utili per la repository, è stato generato nel seguente modo
-~~~bash
-    # usando python3.8.10
-    python3 -m venv venv
-    source venv/bin/activate
-    pip3 install pip==24.1.1
-    pip3 install invoke pre-commit pytest jupyter sphinx
-    pip3 install flake8 doc8 mypy black autoflake isort shellcheck-py
-    pip3 freeze > requirements.txt
-    deactivate
-    rm -r venv
-~~~
-Quindi i pacchetti che contiene sono:
--   **invoke** : utile per l'installazione di pacchetti tramite python
--   **pre-commit** : usato per analizzare il codice prima di committare, serve per evitare commit di codice non funzionante
--   **pytest** : utile per compiere e monitorare test
--   **jupyter** : utile nella documentazione interattiva
--   **sphinx** : utile per creare la documentazione
+## Repository contents
 
-**tasks.py**
-Questo script di python è incaricato nella costruzione automatica della repository, in particolare:
+The master repository contains a basic template for hypothetical projects. It has two source folders:
+- **sources**: This folder contains the first script, main.py, and a common module.
+- **builds** and **libs**: These folders contain the source C code for shared objects.
 
--   installa i pacchetti utili per il software (consultare la task "install"), producendo il file "packages.log" con il log dell'installazione
--   aziona eventuali makefile
+In **assets**, we find images for this README and other graphics scripts.
+In **templates**, we find code templates used by scripts.
 
-**resinstall.sh**
-Questo script permette di reinstallare la repository, servirà abbandonare l'ambiente prima di eseguire lo script:
-~~~bash
-    deactivate
-    ./reinstall.sh /home/stefano/.pyenv/version/3.8.10
-~~~
+In **documents**, we find the project documentation.
+
+
+### Tools and Tests
+
+"Test" and "tools" are folders for organizing Python scripts. Tools are used to show or analyze data, while tests are used for simple programs or proofs.
+
+### Source design
+Source code is organized in modules in sources and Python can call shared objects in libs. Each shared object is made from a single C project in builds. In brief: module organization in sources and sparse organization in builds.
+Run make to refresh the list of shared objects.
+
+### Handle scripts
+This repo uses four scripts to manage libraries and modules:
+- **add_lib.sh**: add a library template in builds
+- **add_mod.sh**: add a module template in sources
+- **rem_lib.sh**: remove a library from builds
+- **rem_mod.sh**: remove a module from sources
+- **history.log**: shows all actions with scripts.
+
+### tasks.py
+This file is a template for new branches. It installs packages and downloads data from the web during installation.
+When yoy modify tasks.sh please reinstall the repository using **reinstall.sh**
 
 ## pre-commit
-Le fasi di pre-commit servono a tenere sicura la repository da modifiche indegne:
-1. **end-of-file-fixer** : controlla la riga di fine file
-2. **mixed-line-ending** : controlla se la riga di fine file è conforme con il sistema operativo (Linux/MacOS: \n, Windows \r\n)
-3. **check-yaml** : controlla i file yaml
-4. **check-json** : controlla i file json
-5. **check-docstring-first** : controlla che la documentazione sia inserita in modo corretto nel codice
-6. **sort-simple-yaml** : formatta i file yaml
-7. **pretty-format-json** : formatta i file json
-8. **flake8** : controlla lo stile di codice Python secondo lo standard PEP8
-9. **doc8** : controlla che la documentazione rispetti lo standard
-10. **autoflake** : rimuove importazioni inutili
-11. **isort** : riordina le importazioni
-12. **shellcheck** : controlla file shell e bash
-13. **mypy** : verifiche statiche di tipizzazione
-14. **black** : formatta il codice python
-Per eseguire un test al volo senza effettivamente committare, è possibile eseguire:
+This repository uses a pre-commit system to manage updates:
+1. **end-of-file-fixer --autofix**
+2. **mixed-line-ending**
+3. **check-yaml**
+4. **check-json**
+5. **check-docstring-first**
+6. **sort-simple-yaml**
+7. **pretty-format-json**
+8. **flake8**
+9. **doc8**
+10. **autoflake**
+11. **isort**
+12. **shellcheck --exclude=='^templates/|install\.sh$'**
+13. **mypy**
+14. **black**
+To check your code without committing it, run:
 ~~~bash
     pre-commit run --all-files
 ~~~
 
-## Uso della repository
-
-### script ausiliari
-
-In **scripts** si possono trovare degli script utili per un corretto uso della repository, vanno chiamati dalla directory del progetto. Chiamandoli senza argomenti verrà illustrato come si usano e i loro effetti.
-
-**add_lib.sh**: aggiunge una libreria in builds
-
-**add_mod.sh**: aggiunge un modulo in sources
-
-**rem_lib.sh**: rimuove una libreria da builds
-
-**rem_mod.sh**: rimuove un modulo da sources
-
-### Semplice guida di github per apportare modifiche
-
-Prima di cominciare la propria sessione di modifiche eseguire "git pull". Questo comando può prevenire di modificare codice già non aggiornato. Se tuttavia ci sono già delle modifiche è sconsigliato eseguire questa istruzione.
+### Simple manual for GitHub
 
 ~~~bash
-git checkout nome_repository  # utile per cambiare branch
-git branch  # informa l'utente della branch corrente
-git status  # informa l'utente dello stato della branch corrente
+git checkout repo_name  # --> change repository branch
+git branch  # get the current branch
+git status  # get the status of current branch
 
-git add .  # aggiunge le modifiche fatte ad un elenco (quindi questo comando può essere eseguito molteplici volte)
-git commit -m "messaggio..."  # avvia il pre-commit e in caso di successo viene concesso il commit
-# un errore di commit è aver eseguito commit senza aver eseguito prima: git add .
-# se non si supera un test, riprovare:
+git add .  # add updates in a queue (add again to update the queue)
+git commit -m "message..."  # start pre-commit over the added queue
+# if you not pass the test, try again:
 # > git add .
-# > git commit -m "messaggio..."
+# > git commit -m "message..."
 
-# se il problema persiste, correggere il codice in funzione degli errori rilevati
-git pull  # si confronta il codice corrente della repository con quello del commit
-# questa fase può fornire errori più o meno difficili da affrontare
-# in genere sono incoerenze tra le modifiche effettuate e la repository pubblicata
-git push  # si pubblica la repository, attenzione MAI eseguire git push oltrepassando git pull
+# il problem persists, manual fix is required.
+# fix code and try again...
+# > git add .
+# > git commit -m "message..."
+
+git pull  # github compare commit with current version of code and try to merge yuor updates
+git push  # fix changes
 ~~~
 
-## Funzionalità
+## Features
 
-Le funzionalità base della repository sono custodite nel modulo **common**
+We find features of repository in **common** folder.
 
-### logger
+### common.logger
 
-logger è il modulo della repository che gestisce i log del progetto, produce due tipi di log: *user.log* e *dev.log*.
-Questi file devono già esistere, inoltre è possibile fornire proprie directory e quindi creare log che non verranno sovrascritti.
+logger module manages log levels and define an abstract class.
 
 <img src="assets/log_policy.png" title="Schema policy di log" style="zoom:100%;" />
 
-### tmpmng
+#### exceptions
+In this repository it is important manage and report all own exceptions:
+- if you raise an exception, report in local documentation:
+~~~python
+"""
+Raise
+---
+    - FileNotFound : _description_ [(traceback)]
+"""
+~~~
+- if you use a own function with potential exceptions, use try to manage the exception:
+  - if you ignore the exception report a warning
+  - if you lunch the exception report an error (report the exception with (traceback) indication)
+  - if you break the program report an error (without raise)
 
-tmpmng è il modulo della repository che gestisce i file temporanei del progetto.
+### common.temp
+
+temp module manages temporary files in **temp**

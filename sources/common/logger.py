@@ -21,10 +21,10 @@ class Logger:
     ---
         - trace(message): Logs a message with tag [TRACE]
         - debug(message): Logs a message with tag [DEBUG]
+        - fatal(message): Logs a message with tag [FATAL]
         - info(message): Logs a message with tag [INFO]
         - warning(message): Logs a message with tag [WARNING]
         - error(message): Logs a message with tag [ERROR]
-        - fatal(message): Logs a message with tag [FATAL]
     """
 
     def __init__(self, user: str = "logs/user.log", dev: str = "logs/dev.log"):
@@ -32,17 +32,17 @@ class Logger:
 
         Params
         ---
-            user (str, optional):
-                path for the user's log. Defaults to "./logs/user.log".
-            dev (str, optional):
-                path for the developer's log. Defaults to "./logs/dev.log".
+            - user (str, optional):
+                path for the user's log. Defaults to "logs/user.log".
+            - dev (str, optional):
+                path for the developer's log. Defaults to "logs/dev.log".
 
         Usage
         ---
             >>> from common import Logger
             >>> log = Logger()
         """
-        print("common | Logger :: __init__")
+        print("Logger.__init__")
         # pulisco i file
         with open(user, "w") as f:
             f.write("")
@@ -50,6 +50,9 @@ class Logger:
             f.write("")
         self.user = user
         self.dev = dev
+
+    def __del__(self):
+        print("Logger.__del__")
 
     def trace(self, message: str = ""):
         """This function logs a message with tag [TRACE].
@@ -85,10 +88,6 @@ class Logger:
         ---
             message (str, optional): massage to log. Defaults to ''.
 
-        Raise
-        ---
-            Exception: If the message cannot be written to the file.
-
         Usage
         ---
             >>> from common import Logger
@@ -118,11 +117,12 @@ class Logger:
 
         Usage
         ---
-            >>> from common import Logger
-            >>> log = Logger()
-            >>> log.fatal('This is a fatal message')
+            >>> try:
+            >>>     # some code that raise Exception
+            >>> except Exception as e:
+            >>>     log.fatal(str(e))
 
-        Note: close the program with os._exit(1) function.
+        Note: kill the program with os._exit(1) function.
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -148,10 +148,6 @@ class Logger:
         Params
         ---
             message (str): massage to log.
-
-        Raise
-        ---
-            Exception: If the message cannot be written to the file.
 
         Usage
         ---
@@ -180,15 +176,14 @@ class Logger:
         ---
             message (str): massage to log.
 
-        Raise
-        ---
-            Exception: If the message cannot be written to the file.
-
         Usage
         ---
-            >>> from common import Logger
-            >>> log = Logger()
-            >>> log.warning('This is a warning message')
+            >>> try:
+            >>>     # some code that raise Exception
+            >>> except Exception as e:
+            >>>     log.warning(str(e))
+            >>>     # do something
+            >>>     # continue the program
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -211,15 +206,14 @@ class Logger:
         ---
             message (str): massage to log.
 
-        Raise
-        ---
-            Exception: If the message cannot be written to the file.
-
         Usage
         ---
-            >>> from common import Logger
-            >>> log = Logger()
-            >>> log.error('This is an error message')
+            >>> try:
+            >>>     # some code that raise Exception
+            >>> except Exception as e:
+            >>>     log.error(str(e))
+            >>>     # do something
+            >>>     reise e
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -235,22 +229,19 @@ class Logger:
                 + f"{file_name} {line_no} :: {message}\n"
             )
 
-    def __del__(self):
-        print("common | Logger :: __del__")
-
 
 class LoggerSupport(ABC):
-    """This class is used as a support for the logger.
+    """This abstract class is used as a support for the logger.
 
     Attributes
     ---
-        - logger (Logger): The logger object.
+        log (Logger): The logger object.
 
     """
 
-    def __init__(self, logger: Logger):
-        self.logger = logger
-        logger.trace(f"{self.__class__.__name__}.__init__")
+    def __init__(self, log: Logger):
+        self.log = log
+        log.trace(f"{self.__class__.__name__}.__init__")
 
     def __del__(self):
-        self.logger.trace(f"{self.__class__.__name__}.__del__")
+        self.log.trace(f"{self.__class__.__name__}.__del__")
