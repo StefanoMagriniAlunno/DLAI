@@ -45,18 +45,12 @@ def download(ctx, unix_like=False):
     #     ctx.run(
     #        f"powershell -Command (New-Object Net.WebClient).DownloadFile('{url}', './data/{path}')"
     #     )
+
     import os
 
     import nltk
 
-    if not os.path.exists(r"data/db/nltk_data"):
-        os.makedirs(r"data/db/nltk_data")
-    wordnet_path = os.path.join(os.getcwd(), r"data/db/nltk_data/wordnet")
-    words_path = os.path.join(os.getcwd(), r"data/db/nltk_data/words")
-    punkt_path = os.path.join(os.getcwd(), r"data/db/nltk_data/punkt")
-    nltk.data.path.append(wordnet_path)
-    nltk.data.path.append(words_path)
-    nltk.data.path.append(punkt_path)
-    nltk.download("wordnet", download_dir=wordnet_path, quiet=True)
-    nltk.download("words", download_dir=words_path, quiet=True)
-    nltk.download("punkt", download_dir=punkt_path, quiet=True)
+    directory = os.path.join(os.getcwd(), r".venv/share/nltk_data")
+    nltk.download("wordnet", prefix=directory, quiet=True)
+    nltk.download("words", prefix=directory, quiet=True)
+    nltk.download("punkt", prefix=directory, quiet=True)

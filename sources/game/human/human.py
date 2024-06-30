@@ -6,8 +6,8 @@ from game import Player
 
 
 class Human(Player):
-    def __init__(self, name: str, logger: Logger):
-        super().__init__(logger)
+    def __init__(self, name: str, log: Logger):
+        super().__init__(log)
         self.name = name
 
     def hint(self, word: str) -> str:

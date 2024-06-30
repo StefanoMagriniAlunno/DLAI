@@ -32,16 +32,17 @@ class JustOne(LoggerSupport):
     Methods
     ---
         - bot(hints: List[str]) -> List[str]: bot function
+        - play(n_turns: int) -> Tuple[List[Tuple[str, Set[str], str]], int]: play the game
 
     """
 
-    def __init__(self, players: List[Player], logger: Logger):
+    def __init__(self, players: List[Player], log: Logger):
         """Constructor of the class
 
         Params
         ---
             - players (List[Player]): list of players objects
-            - logger (Logger): logger object
+            - log (Logger): logger object
 
         Raise
         ---
@@ -49,10 +50,10 @@ class JustOne(LoggerSupport):
 
         Usage
         ---
-            >>> game = JustOne([player1, player2], logger)
+            >>> game = JustOne([player1, player2], log)
         """
         # set del logger
-        super().__init__(logger)
+        super().__init__(log)
 
         # raise
         if len(players) < 2:
@@ -64,7 +65,27 @@ class JustOne(LoggerSupport):
     def __del__(self):
         return super().__del__()
 
-    def __call__(self, n_turns: int) -> Tuple[List[Tuple[str, Set[str], str]], int]:
+    def play(self, n_turns: int) -> Tuple[List[Tuple[str, Set[str], str]], int]:
+        """Play the game
+
+        Params
+        ---
+            n_turns (int): number of turns
+
+        Returns
+        ---
+            Tuple[List[Tuple[str, Set[str], str]], int]: list of solutions and number of wins:
+                - solution (List[Tuple[str, Set[str], str]]): list of solutions:
+                    - str: secret word
+                    - Set[str]: list of hints
+                    - str: answer
+                - wins (int): number of wins
+
+        Usage
+        ---
+            >>> game.play(10)
+
+        """
         solution: List[Tuple[str, Set[str], str]] = []
         for _ in range(n_turns):
             # pesca una parola W dal vocabolario di nltk
