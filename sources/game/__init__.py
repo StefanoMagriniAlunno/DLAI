@@ -1,5 +1,3 @@
-from .game import JustOne
-from .player import Player
-from .vocabulary import Vocabulary
+from .game import JustOne, Player
 
-__all__ = ["JustOne", "Player", "Vocabulary"]
+__all__ = ["JustOne", "Player"]

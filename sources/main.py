@@ -1,32 +1,34 @@
 # Description: Main file of the project. Not change its path!
 
+
 from common import Logger
 from game import JustOne
 from game.human import Human
-from game.vocabulary import Vocabulary
 
 
-def main(logger: Logger):
-    # creo il vocabolario
-    vocab_path = "/db/words_alpha.txt"
+def main(logger: Logger) -> None:
+    """Main function of the project
+
+    Params
+    ---
+        logger (Logger): logger object
+
+    Raise
+    ---
+        - TypeError: If the players are less than 2 (fatal)
+    """
     try:
-        vocab = Vocabulary(vocab_path, logger)
-    except FileNotFoundError as e:
-        logger.fatal(e)
-        return
-
-    # creo il gioco
-    try:
-        game = JustOne([Human("Alice", logger), Human("Bob", logger)], vocab, logger)
+        JustOne([Human("Alice", logger), Human("Bob", logger)], logger)
     except TypeError as e:
         logger.fatal(e)
-        return
-
-    # gioco
-    ret = game(2)
-    logger.info(ret)
 
 
 if __name__ == "__main__":
-    log = Logger()
-    main(log)
+
+    try:
+        log = Logger()
+        main(log)
+    except FileNotFoundError:
+        print("Error opening files.")
+
+    del log
