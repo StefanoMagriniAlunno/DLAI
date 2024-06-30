@@ -3,8 +3,8 @@ import random
 from abc import abstractmethod
 from typing import List, Set, Tuple
 
+import jellyfish
 from common import Logger, LoggerSupport
-from fuzzywuzzy import fuzz
 from nltk.corpus import wordnet
 
 
@@ -89,7 +89,7 @@ class JustOne(LoggerSupport):
         solution: List[Tuple[str, Set[str], str]] = []
         for _ in range(n_turns):
             # pesca una parola W dal vocabolario di nltk
-            w: str = random.choice(wordnet.words())
+            w: str = random.choice(list(wordnet.words()))
             # sceglie un giocatore A (che dovrà indovinare la parola)
             A = random.choice(self.players)
             # hint su tutti gli altri giocatori con la parola W
@@ -108,6 +108,7 @@ class JustOne(LoggerSupport):
 
         Params
         ---
+            - secret_word (str): secret word
             - hints (List[str]): list of hints
 
         Return
@@ -124,7 +125,7 @@ class JustOne(LoggerSupport):
         hints_filtered = [
             hint
             for hint in hints_filtered
-            if fuzz.nysiis(hint) != fuzz.nysiis(secret_word)
+            if jellyfish.nysiis(hint) != jellyfish.nysiis(secret_word)
         ]
         # terzo filtro: elimino gli hint che hanno un lemma simile a quello di secret_word
         hints_filtered = [

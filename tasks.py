@@ -13,14 +13,14 @@ def install(ctx, unix_like=False):
     #     ...
     # ]
     packages = [
-        "numpy",
-        "pandas plotly",
-        "matplotlib",
-        "seaborn",
-        "scikit-learn",
-        "torch torchvision torchaudio",
+        # "numpy",
+        # "pandas plotly",
+        # "matplotlib",
+        # "seaborn",
+        # "scikit-learn",
+        # "torch torchvision torchaudio",
         "nltk",
-        "fuzzywuzzy python-Levenshtein",
+        "jellyfish",
     ]
     for package in packages:
         if unix_like:

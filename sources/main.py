@@ -18,12 +18,18 @@ def main(log: Logger) -> None:
         - TypeError: If the players are less than 2 (fatal)
     """
     try:
-        game = JustOne([Human("Alice", log), Human("Bob", log)], log)
+        game = JustOne(
+            [
+                Human("Alice", log),
+                Human("Bob", log),
+                Human("Carl", log),
+                Human("David", log),
+            ],
+            log,
+        )
+        game.play(2)
     except TypeError as e:
         log.fatal(e)
-
-    # simulo una partita
-    game.play(2)
 
 
 if __name__ == "__main__":
