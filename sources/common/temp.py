@@ -9,7 +9,7 @@ class Temp:
 
     Attributes
     ---
-        - directory (str): The directory where the temporary file is created.
+        directory (str): The directory where the temporary file is created.
 
     Usage
     ---
@@ -30,7 +30,7 @@ class Temp:
         ---
             FileNotFoundError: directory not found.
         """
-        print("common | Temp :: __init__")
+        print("Temp.__init__")
         if not os.path.exists(directory):
             raise FileNotFoundError(f"Directory '{directory}' not found.")
         self.directory = directory
@@ -40,4 +40,4 @@ class Temp:
         return temp_file
 
     def __del__(self):
-        print("common | Temp :: __del__")
+        print("Temp.__del__")
