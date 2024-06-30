@@ -11,6 +11,14 @@ class Human(Player):
         self.name = name
 
     def hint(self, word: str) -> str:
+        """Get a hint from the player
+
+        Args:
+            word (str): The word to get a hint for
+
+        Returns:
+            str: The hint
+        """
         return input("{} insert HINT for word {}: ".format(self, word))
 
     def answer(self, words: Set[str]) -> str:

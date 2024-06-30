@@ -13,9 +13,6 @@ def main(log: Logger) -> None:
     ---
         log (Logger): logger object
 
-    Raise
-    ---
-        - TypeError: If the players are less than 2 (fatal)
     """
     try:
         game = JustOne(
@@ -28,7 +25,7 @@ def main(log: Logger) -> None:
             log,
         )
         game.play(2)
-    except TypeError as e:
+    except AssertionError as e:
         log.fatal(e)
 
 

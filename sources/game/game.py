@@ -27,7 +27,7 @@ class JustOne(LoggerSupport):
 
     Attributes
     ---
-        - self.players (List[Player]): list of callable objects
+        players (List[Player]): list of callable objects
 
     Methods
     ---
@@ -46,7 +46,7 @@ class JustOne(LoggerSupport):
 
         Raise
         ---
-            - TypeError: If the players are less than 2
+            AssertionError: If the players are less than 2
 
         Usage
         ---
@@ -55,9 +55,8 @@ class JustOne(LoggerSupport):
         # set del logger
         super().__init__(log)
 
-        # raise
-        if len(players) < 2:
-            raise TypeError("Must have at least 2 player")
+        # assertion
+        assert len(players) >= 2, "The number of players must be at least 2"
 
         # init
         self.players = players
@@ -83,8 +82,7 @@ class JustOne(LoggerSupport):
 
         Usage
         ---
-            >>> game.play(10)
-
+            >>> game.play(2)
         """
         solution: List[Tuple[str, Set[str], str]] = []
         for _ in range(n_turns):
@@ -113,11 +111,11 @@ class JustOne(LoggerSupport):
 
         Return
         ---
-            - Set[str]: list of words
+            Set[str]: list of words
 
         Usage
         ---
-            >>> game.bot(["hint1", "hint2"])
+            >>> game.bot(word, ["hint1", "hint2"])
         """
         # primo filtro: elimino gli hint che non sono nel dizionario
         hints_filtered = [hint for hint in hints if hint in wordnet.words()]
