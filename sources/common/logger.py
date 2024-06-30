@@ -43,6 +43,11 @@ class Logger:
             >>> log = Logger()
         """
         print("common | Logger :: __init__")
+        # pulisco i file
+        with open(user, "w") as f:
+            f.write("")
+        with open(dev, "w") as f:
+            f.write("")
         self.user = user
         self.dev = dev
 
