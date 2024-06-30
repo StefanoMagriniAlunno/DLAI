@@ -72,7 +72,7 @@ class Logger:
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
         eyes_char = "\U0001F440"
-        with open(self.dev, "a") as f:
+        with open(self.dev, "a", encoding="utf-8") as f:
             f.write(
                 f"{datetime.now()} | TRACE {eyes_char}  | "
                 + f"{file_name} {line_no} :: {message}\n"
@@ -103,7 +103,7 @@ class Logger:
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
         stethoscope_symbol = "\U0001FA7A"
-        with open(self.dev, "a") as f:
+        with open(self.dev, "a", encoding="utf-8") as f:
             f.write(
                 f"{datetime.now()} | DEBUG {stethoscope_symbol} | "
                 + f"{file_name} {line_no} :: {message}\n"
@@ -132,7 +132,7 @@ class Logger:
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
         collision_symbol = "\U0001F4A5"
-        with open(self.dev, "a") as f:
+        with open(self.dev, "a", encoding="utf-8") as f:
             f.write(
                 f"{datetime.now()} | FATAL {collision_symbol}  | "
                 + f"{file_name} {line_no} :: {message}\n"
@@ -167,7 +167,7 @@ class Logger:
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
         eyes_symbol = "\U0001F440"
-        with open(self.user, "a") as f:
+        with open(self.user, "a", encoding="utf-8") as f:
             f.write(
                 f"{datetime.now()} | INFO  {eyes_symbol}  | "
                 + f"{file_name} {line_no} :: {message}\n"
@@ -198,7 +198,7 @@ class Logger:
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
         bell_symbol = "\U0001F514"
-        with open(self.user, "a") as f:
+        with open(self.user, "a", encoding="utf-8") as f:
             f.write(
                 f"{datetime.now()} | WARN  {bell_symbol}  | "
                 + f"{file_name} {line_no} :: {message}\n"
@@ -229,7 +229,7 @@ class Logger:
         line_no = outer_frame[1].lineno
         # scrivo il messaggio nel file
         collision_symbol = "\U0001F4A5"
-        with open(self.user, "a") as f:
+        with open(self.user, "a", encoding="utf-8") as f:
             f.write(
                 f"{datetime.now()} | ERROR {collision_symbol} | "
                 + f"{file_name} {line_no} :: {message}\n"
