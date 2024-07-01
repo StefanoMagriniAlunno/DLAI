@@ -1,6 +1,5 @@
 # This file contains the logger class, which is used to log messages to a file.
 import inspect
-import os
 from abc import ABC
 from datetime import datetime
 
@@ -122,7 +121,7 @@ class Logger:
             >>> except Exception as e:
             >>>     log.fatal(str(e))
 
-        Note: kill the program with os._exit(1) function.
+        Note: kill the program with exit() function.
         """
         # frame delle chiamate
         frame = inspect.currentframe()
@@ -138,9 +137,7 @@ class Logger:
                 + f"{file_name} {line_no} :: {message}\n"
             )
         print("\033[91m" + "EMERGENCY! FATAL ERROR!" + "\033[0m")
-        os._exit(
-            1
-        )  # essendo fatal viene richiesta la chiusura improvvisa del programma
+        exit(1)
 
     def info(self, message: str):
         """This function logs a message with tag [INFO].
