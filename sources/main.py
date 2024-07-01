@@ -13,6 +13,10 @@ def main(log: Logger) -> None:
     ---
         log (Logger): logger object
 
+    Raise
+    ---
+        AssertionError: if the game is not solved
+
     """
     try:
         game = JustOne(
@@ -26,9 +30,18 @@ def main(log: Logger) -> None:
         )
         game.play(2)
     except AssertionError as e:
-        log.fatal(e)
+        # non è fixabile
+        log.error("AssertionError - unsolved")
+        raise e
 
 
 if __name__ == "__main__":
 
-    main(Logger())
+    log = Logger()
+
+    try:
+        main(log)
+    except AssertionError:
+        log.warning("AssertionError - not fixed")
+
+    del log
