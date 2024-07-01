@@ -13,4 +13,4 @@ downloads.log
 data/
 logs/
 temp/
-scripts/
+scripts/events/history.log

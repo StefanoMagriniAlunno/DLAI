@@ -4,7 +4,7 @@ from invoke import task  # type: ignore
 
 
 @task
-def install(ctx, unix_like=False):
+def install(ctx):
     """Installa più pacchetti definiti in una lista."""
     # NOTE: lista di pacchetti da installare
     # packages = [
@@ -23,12 +23,7 @@ def install(ctx, unix_like=False):
         "jellyfish",
     ]
     for package in packages:
-        if unix_like:
-            # Unix-like system
-            ctx.run(f".venv/bin/python3 -m pip install {package}")
-        else:
-            # Windows system
-            ctx.run(f".venv\Scripts\python.exe -m pip install {package}")
+        ctx.run(r"./.venv/bin/python3" + f"-m pip install {package}")
 
 
 @task

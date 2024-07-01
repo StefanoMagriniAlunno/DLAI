@@ -4,12 +4,34 @@
 
 ### Prerequisites
 
-- **Operative system**: Linux Ubuntu 20.04 LTS (Focal Fossa) or 22.04 LTS (Jammy Jellyfish)
-- **Python3**: 3.8.10, with **pip3**
+- **Operative system**: Linux Ubuntu 22.04 LTS (Jammy Jellyfish)
+- **Python3**: 3.10.12
 - **git-all**: installed
-- **pytest**: recommended
 
 No administrator privileges needed.
+
+#### Check prerequisites
+~~~bash
+cat /etc/os-release  # Linux release
+
+python3 --version  # current python version
+# if python version is not 3.10.12 install pyenv:
+sudo apt update
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev \
+liblzma-dev python3-openssl git
+curl https://pyenv.run | bash
+# follow procedure at the end of installation and restart the terminal
+# install a new version of python with pyenv:
+pyenv install 3.10.2
+pyenv local 3.10.2
+
+git --version  # check if git-all is installed
+# if git-all there isn't in your system:
+sudo apt-get install git-all
+~~~
+
 
 ### Install the repository
 
@@ -22,8 +44,9 @@ No administrator privileges needed.
 - Set the current branch and install:
 ~~~bash
     git checkout your_branch
-    ./install.sh /path/of/python3.8.10
+    ./install.sh /path/of/python3.10.12
 ~~~
+
 It took longer than expected. ☕
 
 ## Repository contents
@@ -74,6 +97,7 @@ This repository uses a pre-commit system to manage updates:
 12. **shellcheck --exclude=='^templates/|install\.sh$'**
 13. **mypy**
 14. **black**
+
 To check your code without committing it, run:
 ~~~bash
     pre-commit run --all-files
@@ -101,31 +125,85 @@ git pull  # github compare commit with current version of code and try to merge 
 git push  # fix changes
 ~~~
 
-## Features
+## Logger policy
 
-We find features of repository in **common** folder.
+- All own objects has a base abstract class "LoggerSupport".
+- All own objects accept in construction the logger as last one parameter called "log"
+- Always call super().\_\_init\_\_(log) in \_\_init\_\_ and super().\_\_del\_\_(log) in \_\_del\_\_
+- Report in documentation the personal exceptions
+- Use own function with reported own exception in a "try block"
+- Report the founded exception use the following decision tree:
+ <img src="assets/try_policy.png" title="" style="zoom:70%;" />
+- Report the exception case in message.
+- If you rised a warning, report if you tried solve the problem: "try to fix [exception message]..."
+- If you rised an error, report if fix solve the problem: "solved [exception message]"/"unsolved [exception message]"
 
-### common.logger
+Here a table of exceptions in python.
 
-logger module manages log levels and define an abstract class.
-
-<img src="assets/log_policy.png" title="Schema policy di log" style="zoom:100%;" />
-
-#### exceptions
-In this repository it is important manage and report all own exceptions:
-- if you raise an exception, report in local documentation:
-~~~python
-"""
-Raise
----
-    - FileNotFound : _description_ [(traceback)]
-"""
-~~~
-- if you use a own function with potential exceptions, use try to manage the exception:
-  - if you ignore the exception report a warning
-  - if you lunch the exception report an error (report the exception with (traceback) indication)
-  - if you break the program report an error (without raise)
-
-### common.temp
-
-temp module manages temporary files in **temp**
+- BaseException
+  - BaseExceptionGroup
+  - GeneratorExit
+  - KeyboardInterrupt
+  - SystemExit
+  - Exception
+    - ArithmeticError
+      - FloatingPointError
+      - OverflowError
+      - ZeroDivisionError
+    - AssertionError
+    - AttributeError
+    - BufferError
+    - EOFError
+    - ExceptionGroup [BaseExceptionGroup]
+    - ImportError
+      - ModuleNotFoundError
+    - LookupError
+      - IndexError
+      - KeyError
+    - MemoryError
+    - NameError
+      - UnboundLocalError
+    - OSError
+      - BlockingIOError
+      - ChildProcessError
+      - ConnectionError
+        - BrokenPipeError
+        - ConnectionAbortedError
+        - ConnectionRefusedError
+        - ConnectionResetError
+      - FileExistsError
+      - FileNotFoundError
+      - InterruptedError
+      - IsADirectoryError
+      - NotADirectoryError
+      - PermissionError
+      - ProcessLookupError
+      - TimeoutError
+    - ReferenceError
+    - RuntimeError
+      - NotImplementedError
+      - RecursionError
+    - StopAsyncIteration
+    - StopIteration
+    - SyntaxError
+      - IndentationError
+        - TabError
+    - SystemError
+    - TypeError
+    - ValueError
+      - UnicodeError
+        - UnicodeDecodeError
+        - UnicodeEncodeError
+        - UnicodeTranslateError
+    - Warning
+      - BytesWarning
+      - DeprecationWarning
+      - EncodingWarning
+      - FutureWarning
+      - ImportWarning
+      - PendingDeprecationWarning
+      - ResourceWarning
+      - RuntimeWarning
+      - SyntaxWarning
+      - UnicodeWarning
+      - UserWarning
