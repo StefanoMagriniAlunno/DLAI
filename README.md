@@ -135,75 +135,14 @@ git push  # fix changes
 - Report the founded exception use the following decision tree:
  <img src="assets/try_policy.png" title="" style="zoom:70%;" />
 - Report the exception case in message.
-- If you rised a warning, report if you tried solve the problem: "try to fix [exception message]..."
-- If you rised an error, report if fix solve the problem: "solved [exception message]"/"unsolved [exception message]"
+- If you rised a warning, report if you tried solve the problem: (ex. "Exception fixed")
+- If you rised an error, report if fix solve the problem: "Exception solved"/"Exception unsolved"
 
-Here a table of exceptions in python.
+Limit usage of exceptions using only exception of this list:
+- AssertionError
+- LookupError
+- StopAsyncIteration
+- ValueError
+- Warning
 
-- BaseException
-  - BaseExceptionGroup
-  - GeneratorExit
-  - KeyboardInterrupt
-  - SystemExit
-  - Exception
-    - ArithmeticError
-      - FloatingPointError
-      - OverflowError
-      - ZeroDivisionError
-    - AssertionError
-    - AttributeError
-    - BufferError
-    - EOFError
-    - ExceptionGroup [BaseExceptionGroup]
-    - ImportError
-      - ModuleNotFoundError
-    - LookupError
-      - IndexError
-      - KeyError
-    - MemoryError
-    - NameError
-      - UnboundLocalError
-    - OSError
-      - BlockingIOError
-      - ChildProcessError
-      - ConnectionError
-        - BrokenPipeError
-        - ConnectionAbortedError
-        - ConnectionRefusedError
-        - ConnectionResetError
-      - FileExistsError
-      - FileNotFoundError
-      - InterruptedError
-      - IsADirectoryError
-      - NotADirectoryError
-      - PermissionError
-      - ProcessLookupError
-      - TimeoutError
-    - ReferenceError
-    - RuntimeError
-      - NotImplementedError
-      - RecursionError
-    - StopAsyncIteration
-    - StopIteration
-    - SyntaxError
-      - IndentationError
-        - TabError
-    - SystemError
-    - TypeError
-    - ValueError
-      - UnicodeError
-        - UnicodeDecodeError
-        - UnicodeEncodeError
-        - UnicodeTranslateError
-    - Warning
-      - BytesWarning
-      - DeprecationWarning
-      - EncodingWarning
-      - FutureWarning
-      - ImportWarning
-      - PendingDeprecationWarning
-      - ResourceWarning
-      - RuntimeWarning
-      - SyntaxWarning
-      - UnicodeWarning
-      - UserWarning
+Catch not own exception using Exception wrapper
