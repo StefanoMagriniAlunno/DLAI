@@ -22,8 +22,9 @@ No administrator privileges needed.
 - Set the current branch and install:
 ~~~bash
     git checkout your_branch
-    ./install.sh /path/of/python3.8.10
+    ./install.sh /path/of/python3.10.12
 ~~~
+
 It took longer than expected. ☕
 
 ## Repository contents
@@ -74,6 +75,7 @@ This repository uses a pre-commit system to manage updates:
 12. **shellcheck --exclude=='^templates/|install\.sh$'**
 13. **mypy**
 14. **black**
+    
 To check your code without committing it, run:
 ~~~bash
     pre-commit run --all-files
