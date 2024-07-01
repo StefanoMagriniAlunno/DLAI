@@ -23,7 +23,7 @@ def install(ctx):
         "jellyfish",
     ]
     for package in packages:
-        ctx.run(r"./.venv/bin/python3" + f"-m pip install {package}")
+        ctx.run(r"./.venv/bin/python3" + f" -m pip install {package}")
 
 
 @task

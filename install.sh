@@ -23,7 +23,7 @@ if [ "$(lsb_release -sr)" != "22.04" ]; then
     exit 1
 fi
 # Che python_cmd sia python3.10.12
-if ! "$python_cmd" -c "import sys; print(sys.version_info[:3])" | grep -q "3.10.12"; then
+if ! "$python_cmd" -c "import sys; print(sys.version_info[:3])" | grep -q "(3, 10, 12)"; then
     echo -e "\e[31mERROR\e[0m: This script is only for Python 3.10.12"
     exit 1
 fi
