@@ -2,6 +2,10 @@
   "recommendations": [
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "njpwerner.autodocstring"
+    "njpwerner.autodocstring",
+    "better-comments.multilineComments",
+    "ms-toolsai.jupyter",
+    "ms-vsliveshare.vsliveshare",
+    "emilast.LogFileHighlighter"
   ]
 }
