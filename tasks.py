@@ -46,6 +46,6 @@ def download(ctx, unix_like=False):
     import nltk
 
     directory = os.path.join(os.getcwd(), r".venv/share/nltk_data")
-    nltk.download("wordnet", prefix=directory, quiet=True)
-    nltk.download("words", prefix=directory, quiet=True)
-    nltk.download("punkt", prefix=directory, quiet=True)
+    nltk.download("wordnet", download_dir=directory, quiet=True)
+    nltk.download("words", download_dir=directory, quiet=True)
+    nltk.download("punkt", download_dir=directory, quiet=True)
