@@ -9,7 +9,7 @@ virtualenv_version="20.26.3"
 # Controlla se è stato fornito un argomento
 if [ $# -eq 1 ]; then
     # La path passata è quella di python
-    python_cmd="$1"
+    python_cmd=$1
 fi
 
 # aggiorno pip a $pip_version
