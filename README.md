@@ -4,8 +4,8 @@
 
 ### Prerequisites
 
-- **Operative system**: Linux Ubuntu 20.04 LTS (Focal Fossa) or 22.04 LTS (Jammy Jellyfish)
-- **Python3**: 3.8.10, with **pip3**
+- **Operative system**: Linux Ubuntu 22.04 LTS (Jammy Jellyfish)
+- **Python3**: 3.10.12, with **pip3**
 - **git-all**: installed
 - **pytest**: recommended
 
