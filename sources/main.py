@@ -28,11 +28,26 @@ def main(log: Logger) -> None:
             ],
             log,
         )
-        game.play(2)
-    except AssertionError as e:
-        # non è fixabile
+        game.play(-2)
+    except AssertionError:
+        # fix
+        try:
+            pass
+        except Exception as e:
+            log.fatal(f"unexpected exception detected: {e}")
+        # unsolved
         log.error("AssertionError - unsolved")
-        raise e
+        raise
+    except ValueError:
+        # fix
+        try:
+            game.play(2)
+        except Exception as e:
+            log.fatal(f"unexpected exception detected: {e}")
+        # solved
+        log.warning("ValueError - solved")
+    except Exception as e:
+        log.fatal(f"unexpected exception detected: {e}")
 
 
 if __name__ == "__main__":

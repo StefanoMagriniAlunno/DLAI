@@ -80,10 +80,18 @@ class JustOne(LoggerSupport):
                     - str: answer
                 - wins (int): number of wins
 
+        Raise
+        ---
+            ValueError: If n_turns is negative.
+
         Usage
         ---
             >>> game.play(2)
         """
+
+        if n_turns < 0:
+            raise ValueError(f"Required n_turns >= 0 but n_turns={n_turns}")
+
         solution: List[Tuple[str, Set[str], str]] = []
         for _ in range(n_turns):
             # pesca una parola W dal vocabolario di nltk
