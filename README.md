@@ -81,7 +81,48 @@ This repo uses four scripts to manage libraries and modules:
 This file is a template for new branches. It installs packages and downloads data from the web during installation.
 When yoy modify tasks.sh please reinstall the repository using **reinstall.sh**
 
-## pre-commit
+## GitHub
+### Good practice
+Before starting an editing session, it is good practice to make sure that while you are not using the repository, no changes have already been made by other users.
+~~~bash
+    git pull
+~~~
+If there have been changes to the tasks.py or requirements.txt or install.sh files, it may be helpful, if not necessary, to reinstall the repository.
+~~~bash
+    ./resinstall.sh /path/of/python3.10.12
+~~~
+
+If you think the master branch has been changed and you have your own changes in the repository yet to be committed, try executing:
+~~~bash
+    git merge master
+~~~
+This command tries to integrate changes made in the master branch within the current branch. It is also possible to execute:
+~~~bash
+    git pull
+~~~
+However, this instruction attempts a merge of the entire current branch thus including files that do not pertain to the master branch.
+If the union could not be resolved in a file, then an exclamation mark will appear and within it options as to which variant should be considered:
+~~~python
+    <<<<<<< yours:sample.txt
+    Local version
+    =======
+    Ufficial version
+    >>>>>>> theirs:sample.txt
+~~~
+In this case, it will be necessary to assess which of the two versions to choose on a case-by-case basis. Then open the official repository and examine the branch to see how the author of the changes to the master decided to resolve the inconsistencies. In case of doubt, contact the administrator of the master branch.
+
+If there have been changes to the requirements.txt or install.sh files, it may be helpful, if not necessary, to reinstall the repository.
+~~~bash
+    ./resinstall.sh /path/of/python3.10.12
+~~~
+
+### Commit
+If you want to submit your changes to github and compare them with the current public version of your branch run:
+~~~bash
+    git add .  # Consolidate all changes into a single, simple list of changes
+    git commit -m "your message"  # Try to commit the changes
+~~~
+
 This repository uses a pre-commit system to manage updates:
 1. **end-of-file-fixer --autofix**
 2. **mixed-line-ending**
@@ -103,27 +144,32 @@ To check your code without committing it, run:
     pre-commit run --all-files
 ~~~
 
-### Simple manual for GitHub
-
+If you do not pass a pre-commit test then try again at least one more time:
 ~~~bash
-git checkout repo_name  # --> change repository branch
-git branch  # get the current branch
-git status  # get the status of current branch
-
-git add .  # add updates in a queue (add again to update the queue)
-git commit -m "message..."  # start pre-commit over the added queue
-# if you not pass the test, try again:
-# > git add .
-# > git commit -m "message..."
-
-# il problem persists, manual fix is required.
-# fix code and try again...
-# > git add .
-# > git commit -m "message..."
-
-git pull  # github compare commit with current version of code and try to merge yuor updates
-git push  # fix changes
+    git add .
+    git commit -m "your message"
 ~~~
+
+If the second attempt still fails the tests, then look for the error in your code by following the pre-commit directions.
+
+If all tests are passed then proceed with synchronization. Then compare the proposed changes with the currently official branch:
+~~~bash
+    git pull
+~~~
+
+Git will try to merge your current local branch with the public branch. If there are unresolved inconsistencies it will throw an alert and you will need to follow the directions to find the inconsistencies and resolve them manually.
+
+If the update did not help or found no problems then you can proceed with sending the changes because the local repository can now merge with the official one.
+~~~bash
+    git push
+~~~
+
+### Other commands
+~~~bash
+    git branch  # show the current branch
+    git status  # show the status of working tree (ex. commits, changes, merges ...)
+~~~
+
 
 ## Logger policy
 
