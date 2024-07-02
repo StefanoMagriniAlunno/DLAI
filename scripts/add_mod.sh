@@ -72,6 +72,27 @@ if [ ! -d "sources/$PARENT_MODULE/$MODULE" ]; then
             exit 1
         fi
     fi
+    # prendo da templates la directory _documents e la copio in documents/sources/{PARENT_MODULE}
+    if ! cp -r templates/_documents documents/sources/"$PARENT_MODULE" ; then
+        echo -e "\e[31mERROR\e[0m: An error occurred while copying the directory _documents to documents/sources/$PARENT_MODULE."
+        .venv/bin/python3 assets/finish_error.py
+        exit 1
+    fi
+    # rinomino la cartella _documents in {MODULE}
+    if ! mv documents/sources/"$PARENT_MODULE"/_documents documents/sources/"$PARENT_MODULE"/"$MODULE" ; then
+        echo -e "\e[31mERROR\e[0m: An error occurred while renaming the directory _documents to $MODULE."
+        .venv/bin/python3 assets/finish_error.py
+        exit 1
+    fi
+    # se $MODULE è diverso da example:
+    if [ "$MODULE" != "example" ]; then
+        # cambio nome al file example.rst in {MODULE}.rst
+        if ! mv documents/sources/"$PARENT_MODULE"/"$MODULE"/example.rst documents/sources/"$PARENT_MODULE"/"$MODULE"/"$MODULE".rst ; then
+            echo -e "\e[31mERROR\e[0m: An error occurred while renaming the file example.rst to $MODULE.rst."
+            .venv/bin/python3 assets/finish_error.py
+            exit 1
+        fi
+    fi
 fi
 
 # riporto in scripts/events/history.log il comando eseguito
