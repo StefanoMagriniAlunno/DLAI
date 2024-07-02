@@ -72,6 +72,9 @@ if [ ! -d "sources/$PARENT_MODULE/$MODULE" ]; then
             exit 1
         fi
     fi
+fi
+# se non esiste la directory documents/sources/{PARENT_MODULE}/{MODULE} allora la creo
+if [ ! -d "documents/sources/$PARENT_MODULE/$MODULE" ]; then
     # prendo da templates la directory _documents e la copio in documents/sources/{PARENT_MODULE}
     if ! cp -r templates/_documents documents/sources/"$PARENT_MODULE" ; then
         echo -e "\e[31mERROR\e[0m: An error occurred while copying the directory _documents to documents/sources/$PARENT_MODULE."
