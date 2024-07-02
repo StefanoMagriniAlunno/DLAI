@@ -21,6 +21,7 @@ def install(ctx):
         # "torch torchvision torchaudio",
         "nltk",
         "jellyfish",
+        "colorama",
     ]
     for package in packages:
         ctx.run(r"./.venv/bin/python3" + f" -m pip install {package}")

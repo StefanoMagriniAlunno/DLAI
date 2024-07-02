@@ -1,6 +1,7 @@
 # Description: Human player definition
 from typing import Set
 
+from colorama import Fore, Style
 from common import Logger
 from game import Player
 
@@ -19,10 +20,36 @@ class Human(Player):
         Returns:
             str: The hint
         """
-        return input("{} insert HINT for word {}: ".format(self, word))
+        return input(
+            Fore.BLUE
+            + f"{self}"
+            + Style.RESET_ALL
+            + " insert "
+            + Style.BRIGHT
+            + "HINT"
+            + Style.RESET_ALL
+            + " for word "
+            + Fore.MAGENTA
+            + word
+            + ": "
+            + Style.RESET_ALL
+        )
 
     def answer(self, words: Set[str]) -> str:
-        return input("{} insert ANSWER for words {}: ".format(self, words))
+        return input(
+            Fore.BLUE
+            + f"{self}"
+            + Style.RESET_ALL
+            + " insert "
+            + Style.BRIGHT
+            + "ANSWER"
+            + Style.RESET_ALL
+            + " for words "
+            + Fore.MAGENTA
+            + " ".join(words)
+            + ": "
+            + Style.RESET_ALL
+        )
 
     def __str__(self):
         return self.name
