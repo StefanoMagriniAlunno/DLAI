@@ -114,6 +114,7 @@ mkdir -p "temp"
 mkdir -p "documents/_build"
 mkdir -p "documents/_static"
 mkdir -p "documents/_templates"
+mkdir -p "documents/builds"
 touch "scripts/events/history.log"
 touch "logs/user.log"
 touch "logs/dev.log"
@@ -136,10 +137,25 @@ if ! "$invoke_cmd" download > downloads.log; then
     "$python3_cmd" assets/finish_error.py
     exit 1
 fi
+
 echo -e "\e[32mSUCCESS\e[0m: custom packages installed"
+echo -e "\e[35mBuild libraries and documentation...\e[0m"
 
 # preparo builds
-make --silent
+if ! make --silent; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while compiling libraries"
+    "$python3_cmd" assets/finish_error.py
+    exit 1
+fi
+
+# generazione della documentazione
+if ! make -C documents html; then
+    echo -e "\e[31mERROR\e[0m: An error occurred while making documentation"
+    "$python3_cmd" assets/finish_error.py
+    exit 1
+fi
+
+echo -e "\e[32mSUCCESS\e[0m"
 
 # controllo la repository
 "$pre_commit_cmd" run --all-files
