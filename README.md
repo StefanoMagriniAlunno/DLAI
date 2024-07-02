@@ -127,22 +127,22 @@ git push  # fix changes
 
 ## Logger policy
 
-- All own objects has a base abstract class "LoggerSupport".
-- All own objects accept in construction the logger as last one parameter called "log"
-- Always call super().\_\_init\_\_(log) in \_\_init\_\_ and super().\_\_del\_\_(log) in \_\_del\_\_
-- Report in documentation the personal exceptions
-- Use own function with reported own exception in a "try block"
-- Report the founded exception use the following decision tree:
- <img src="assets/try_policy.png" title="" style="zoom:70%;" />
-- Report the exception case in message.
-- If you rised a warning, report if you tried solve the problem: (ex. "Exception fixed")
-- If you rised an error, report if fix solve the problem: "Exception solved"/"Exception unsolved"
+- All custom objects have a base abstract class "LoggerSupport".
+- All custom objects accept the logger as last parameter in construction, called "log".
+- Always call super().\_\_init\_\_(log) in \_\_init\_\_ and super().\_\_del\_\_(log) in \_\_del\_\_.
+- Report the custom exceptions in the documentation
+- Use your own function with your own reported exception in a "try block".
+- Report the found exception using the following decision tree:
+ <img src="assets/try_policy.svg" title="" style="zoom:70%;" />.
+- Report the exception in a message.
+- If you rised a warning, report if you tried to solve the problem.
+- If you rised an error, report if fix solve the problem.
 
-Limit usage of exceptions using only exception of this list:
+Limit the use of exceptions by using only exceptions from this list:
 - AssertionError
 - LookupError
 - StopAsyncIteration
 - ValueError
 - Warning
 
-Catch not own exception using Exception wrapper
+Catch other exceptions using Exception as a wrapper
