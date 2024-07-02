@@ -7,6 +7,7 @@ Just One documentation
 
    sources/main
    sources/common/common
+   sources/game/game
 
 Indices and tables
 ==================
