@@ -1,11 +1,15 @@
 {
   "recommendations": [
+    "GitHub.copilot",
+    "GitHub.vscode-pull-request-github",
     "ms-python.python",
+    "ms-vscode.cpptools",
+    "ms-vscode.makefile-tools",
+    "ms-toolsai.jupyter",
+    "ms-python.python-debugger",
     "ms-python.vscode-pylance",
     "njpwerner.autodocstring",
-    "better-comments.multilineComments",
-    "ms-toolsai.jupyter",
     "ms-vsliveshare.vsliveshare",
-    "emilast.LogFileHighlighter"
+    "redhat.vscode-yaml"
   ]
 }
