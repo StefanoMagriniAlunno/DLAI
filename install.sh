@@ -149,6 +149,7 @@ if ! make --silent; then
 fi
 
 # generazione della documentazione
+export PATH=".venv/bin:$PATH"
 if ! make -C documents html; then
     echo -e "\e[31mERROR\e[0m: An error occurred while making documentation"
     "$python3_cmd" assets/finish_error.py
