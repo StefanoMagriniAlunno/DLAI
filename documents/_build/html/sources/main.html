@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Main Script &#8212; DLAI / just-one 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Welcome to My Project’s Documentation" href="../index.html" />
+
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+
+
+
+
+  </head><body>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+
+
+          <div class="body" role="main">
+
+  <section id="main-script">
+<h1>Main Script<a class="headerlink" href="#main-script" title="Link to this heading">¶</a></h1>
+<p>Questo è il file principale del progetto che avvia il gioco JustOne con giocatori umani.</p>
+<section id="scopo">
+<h2>Scopo<a class="headerlink" href="#scopo" title="Link to this heading">¶</a></h2>
+<p>Questo script inizializza una partita di JustOne con quattro giocatori umani e gestisce le eccezioni che possono verificarsi durante il gioco.</p>
+</section>
+<section id="utilizzo">
+<h2>Utilizzo<a class="headerlink" href="#utilizzo" title="Link to this heading">¶</a></h2>
+<p>Per eseguire lo script, esegui il seguente comando:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>main_script.py
+</pre></div>
+</div>
+</section>
+<section id="dipendenze">
+<h2>Dipendenze<a class="headerlink" href="#dipendenze" title="Link to this heading">¶</a></h2>
+<p>Lo script dipende dai seguenti moduli Python:
+- <cite>common</cite> per il logger (<cite>Logger</cite>)
+- <cite>game</cite> per la classe principale del gioco (<cite>JustOne</cite>)
+- <cite>game.human</cite> per la classe <cite>Human</cite></p>
+</section>
+<section id="descrizione-del-codice">
+<h2>Descrizione del Codice<a class="headerlink" href="#descrizione-del-codice" title="Link to this heading">¶</a></h2>
+<p>Il codice inizia importando le seguenti componenti:
+- <cite>Logger</cite> dal modulo <cite>common</cite>
+- <cite>JustOne</cite> dal modulo <cite>game</cite>
+- <cite>Human</cite> dal modulo <cite>game.human</cite></p>
+<p>Viene quindi creato un oggetto <cite>Logger</cite> per la registrazione dei messaggi.</p>
+<p>Successivamente, il codice tenta di inizializzare una partita <cite>JustOne</cite> con quattro giocatori umani (<cite>Human</cite>). Se un’eccezione di tipo <cite>AssertionError</cite> viene sollevata durante il gioco con il parametro <cite>-2</cite>, viene gestita con un tentativo di risolvere il problema. Se viene sollevata un’eccezione di tipo <cite>ValueError</cite> con il parametro <cite>2</cite>, viene gestita con successo e viene registrato un avviso. Tutte le altre eccezioni vengono registrate come fatali.</p>
+<p>Infine, il logger viene eliminato.</p>
+</section>
+<section id="codice">
+<h2>Codice<a class="headerlink" href="#codice" title="Link to this heading">¶</a></h2>
+<p>Il codice completo dello script è il seguente:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Description: Main file of the project. Not change its path!</span>
+
+<span class="kn">from</span> <span class="nn">common</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">game</span> <span class="kn">import</span> <span class="n">JustOne</span>
+<span class="kn">from</span> <span class="nn">game.human</span> <span class="kn">import</span> <span class="n">Human</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">game</span> <span class="o">=</span> <span class="n">JustOne</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">Human</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">log</span><span class="p">),</span>
+            <span class="n">Human</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="n">log</span><span class="p">),</span>
+            <span class="n">Human</span><span class="p">(</span><span class="s2">&quot;Carl&quot;</span><span class="p">,</span> <span class="n">log</span><span class="p">),</span>
+            <span class="n">Human</span><span class="p">(</span><span class="s2">&quot;David&quot;</span><span class="p">,</span> <span class="n">log</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="n">log</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+    <span class="c1"># fix</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unexpected exception detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># unsolved</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;AssertionError - unsolved&quot;</span><span class="p">)</span>
+    <span class="k">raise</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="c1"># fix</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">game</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unexpected exception detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># solved</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;ValueError - fixed&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unexpected exception detected: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">del</span> <span class="n">log</span>
+</pre></div>
+</div>
+<p>Questo documento fornisce una descrizione del file principale <cite>main_script.py</cite>, spiega come utilizzarlo, elenca le sue dipendenze e fornisce una panoramica del codice contenuto nel file.</p>
+<p>### Considerazioni Finali</p>
+<p>Questa documentazione fornisce una visione generale del tuo script Python, spiegando il suo scopo, come utilizzarlo e descrivendo le dipendenze necessarie. Assicurati di adattare le descrizioni e le istruzioni di utilizzo in base alle specifiche del tuo progetto. Se hai bisogno di ulteriori dettagli o modifiche, fammelo sapere!</p>
+</section>
+</section>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">DLAI / just-one</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Main Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#scopo">Scopo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utilizzo">Utilizzo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dipendenze">Dipendenze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#descrizione-del-codice">Descrizione del Codice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#codice">Codice</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to My Project’s Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, StefanoMagriniAlunno.
+
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+
+      |
+      <a href="../_sources/sources/main.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+
+
+
+  </body>
+</html>

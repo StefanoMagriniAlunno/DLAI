@@ -6,15 +6,19 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "DLAI"
-copyright = "2024, StefanoMagriniAlunno"
-author = "StefanoMagriniAlunno"
+project = "DLAI / just-one"
+copyright = "2024, StefanoMagriniAlunno"  # TODO: mettere gli autori
+author = "StefanoMagriniAlunno"  # TODO: mettere gli autori
 release = "1.0.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []  # type: ignore
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
