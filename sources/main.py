@@ -45,7 +45,7 @@ def main(log: Logger) -> None:
         except Exception as e:
             log.fatal(f"unexpected exception detected: {e}")
         # solved
-        log.warning("ValueError - solved")
+        log.warning("ValueError - fixed")
     except Exception as e:
         log.fatal(f"unexpected exception detected: {e}")
 
