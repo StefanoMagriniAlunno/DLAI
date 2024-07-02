@@ -1,15 +1,70 @@
-# example.py
+Common module
+=============
 
-Questo file contiene il punto di ingresso principale del nostro programma
+Introduction
+------------
 
-Dipendenze (in ordine di importazione):
-- `common` per il logger (`Logger`) e la classe astratta `LoggerSupport`
+Description of the module.
 
+Dependencies
+~~~~~~~~~~~~
 
-## File YAML di configurazione
+Dependencies of the module.
 
-## Tipi definiti
+YAML Configuration File
+~~~~~~~~~~~~~~~~~~~~~~~
 
-## Costanti definite
+file yaml with the configuration of the module.
 
-## Funzioni definite
+Contents
+--------
+
+Defined Types
+~~~~~~~~~~~~~
+
+List of Defined Types
+
+Type1
+^^^^^
+
+Description and code of Type1
+
+Type2
+^^^^^
+
+Description and code of Type1
+
+Constants Defined
+~~~~~~~~~~~~~~~~~
+
+List of Constants Defined
+
+Functions Defined
+~~~~~~~~~~~~~~~~~
+
+List of Functions Defined
+
+Usage Examples
+--------------
+
+Esempi di utilizzo del modulo e delle sue funzioni.
+
+Example1
+~~~~~~~~
+
+Descrizione e codice di esempio1.
+
+Example2
+~~~~~~~~
+
+Descrizione e codice di esempio2.
+
+Notes
+-----
+
+Note aggiuntive e commenti sul modulo.
+
+References
+----------
+
+Riferimenti e link utili.

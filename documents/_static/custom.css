@@ -1,0 +1,39 @@
+body {
+    background-color: ivory;
+    color: darkslategray;
+    font-size: 14px;
+}
+
+h1 {
+    color: maroon;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 36px;
+}
+h2 {
+    color: navy;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+h3 {
+    color: green;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 25px;
+}
+h4 {
+    color: maroon;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 21px;
+}
+h5 {
+    color: navy;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+h6 {
+    color: green;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+}

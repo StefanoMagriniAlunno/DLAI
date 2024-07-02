@@ -1,4 +1,4 @@
 from .logger import Logger, LoggerSupport
-from .temp import Temp
+from .tempgen import TempGen
 
-__all__ = ["Logger", "LoggerSupport", "Temp"]
+__all__ = ["Logger", "LoggerSupport", "TempGen"]
