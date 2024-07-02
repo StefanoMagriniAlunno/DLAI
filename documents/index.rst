@@ -1,11 +1,17 @@
-DLAI documentation
-=====================================
+Just One documentation
+======================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   sources/main.rst
+   sources/common/common
+
+.. toctree::
+   :hidden:
+
+   sources/main
+
 
 Indices and tables
 ==================

@@ -3,8 +3,8 @@ import tempfile
 from typing import IO
 
 
-class Temp:
-    """Temp class
+class TempGen:
+    """TempGen class
     This class creates a temporary file in the specified directory.
 
     Attributes
@@ -13,8 +13,8 @@ class Temp:
 
     Usage
     ---
-        >>> from common import Temp
-        >>> tmp = Temp()
+        >>> from common import TempGen
+        >>> tmp = TempGen()
         >>> file = tmp()
     """
 
@@ -30,7 +30,7 @@ class Temp:
         ---
             FileNotFoundError: directory not found.
         """
-        print("Temp.__init__")
+        print("TempGen.__init__")
         if not os.path.exists(directory):
             raise FileNotFoundError(f"Directory '{directory}' not found.")
         self.directory = directory
@@ -40,4 +40,4 @@ class Temp:
         return temp_file
 
     def __del__(self):
-        print("Temp.__del__")
+        print("TempGen.__del__")

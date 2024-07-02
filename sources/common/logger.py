@@ -38,6 +38,7 @@ class Logger:
 
         Usage
         ---
+
             >>> from common import Logger
             >>> log = Logger()
         """
@@ -62,17 +63,15 @@ class Logger:
 
         Usage
         ---
+
             >>> from common import Logger
             >>> log = Logger()
             >>> log.trace('This is a trace message')
         """
-        # frame delle chiamate
         frame = inspect.currentframe()
         outer_frame = inspect.getouterframes(frame)
-        # prendo il nome del file e il numero di riga
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
-        # scrivo il messaggio nel file
         eyes_char = "\U0001F440"
         with open(self.dev, "a", encoding="utf-8") as f:
             f.write(
@@ -89,17 +88,15 @@ class Logger:
 
         Usage
         ---
+
             >>> from common import Logger
             >>> log = Logger()
             >>> log.debug('This is a debug message')
         """
-        # frame delle chiamate
         frame = inspect.currentframe()
         outer_frame = inspect.getouterframes(frame)
-        # prendo il nome del file e il numero di riga
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
-        # scrivo il messaggio nel file
         stethoscope_symbol = "\U0001FA7A"
         with open(self.dev, "a", encoding="utf-8") as f:
             f.write(
@@ -116,20 +113,21 @@ class Logger:
 
         Usage
         ---
+
             >>> try:
             >>>     # some code that raise Exception
             >>> except Exception as e:
-            >>>     log.fatal(str(e))
+            >>>     try:
+            >>>         # do something to recover
+            >>>     except Exception as e:
+            >>>         log.fatal("")
 
         Note: kill the program with exit() function.
         """
-        # frame delle chiamate
         frame = inspect.currentframe()
         outer_frame = inspect.getouterframes(frame)
-        # prendo il nome del file e il numero di riga
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
-        # scrivo il messaggio nel file
         collision_symbol = "\U0001F4A5"
         with open(self.dev, "a", encoding="utf-8") as f:
             f.write(
@@ -148,17 +146,15 @@ class Logger:
 
         Usage
         ---
+
             >>> from common import Logger
             >>> log = Logger()
             >>> log.info('This is an info message')
         """
-        # frame delle chiamate
         frame = inspect.currentframe()
         outer_frame = inspect.getouterframes(frame)
-        # prendo il nome del file e il numero di riga
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
-        # scrivo il messaggio nel file
         eyes_symbol = "\U0001F440"
         with open(self.user, "a", encoding="utf-8") as f:
             f.write(
@@ -175,20 +171,16 @@ class Logger:
 
         Usage
         ---
+
             >>> try:
             >>>     # some code that raise Exception
             >>> except Exception as e:
             >>>     log.warning(str(e))
-            >>>     # do something
-            >>>     # continue the program
         """
-        # frame delle chiamate
         frame = inspect.currentframe()
         outer_frame = inspect.getouterframes(frame)
-        # prendo il nome del file e il numero di riga
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
-        # scrivo il messaggio nel file
         bell_symbol = "\U0001F514"
         with open(self.user, "a", encoding="utf-8") as f:
             f.write(
@@ -205,20 +197,16 @@ class Logger:
 
         Usage
         ---
+
             >>> try:
             >>>     # some code that raise Exception
             >>> except Exception as e:
-            >>>     log.error(str(e))
-            >>>     # do something
-            >>>     reise e
+            >>>     log.error(f"unexpected error {e}")
         """
-        # frame delle chiamate
         frame = inspect.currentframe()
         outer_frame = inspect.getouterframes(frame)
-        # prendo il nome del file e il numero di riga
         file_name = outer_frame[1].filename
         line_no = outer_frame[1].lineno
-        # scrivo il messaggio nel file
         collision_symbol = "\U0001F4A5"
         with open(self.user, "a", encoding="utf-8") as f:
             f.write(
@@ -237,8 +225,8 @@ class LoggerSupport(ABC):
     """
 
     def __init__(self, log: Logger):
-        self.log = log
         log.trace(f"{self.__class__.__name__}.__init__")
+        self.log = log
 
     def __del__(self):
         self.log.trace(f"{self.__class__.__name__}.__del__")
