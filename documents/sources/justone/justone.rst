@@ -30,5 +30,5 @@ Contents
 .. automodule:: justone
    :members:
    :undoc-members:
-   :show-inheritance:
    :inherited-members:
+   :show-inheritance:
