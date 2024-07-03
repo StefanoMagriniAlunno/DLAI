@@ -10,10 +10,6 @@ and components used in the project.
    :caption: Contents:
 
    sources/common/common.rst
-
-.. toctree::
-   :hidden:
-
    sources/main.rst
 
 Indices and tables
