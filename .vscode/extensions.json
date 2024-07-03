@@ -10,6 +10,7 @@
     "ms-python.vscode-pylance",
     "njpwerner.autodocstring",
     "ms-vsliveshare.vsliveshare",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "esbonio.theme-esbonio"
   ]
 }

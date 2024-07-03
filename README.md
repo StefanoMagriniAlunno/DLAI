@@ -189,26 +189,3 @@ If the update did not help or found no problems then you can proceed with sendin
     git branch  # show the current branch
     git status  # show the status of working tree (ex. commits, changes, merges ...)
 ~~~
-
-
-## Logger policy
-
-- All custom objects have a base abstract class "LoggerSupport".
-- All custom objects accept the logger as last parameter in construction, called "log".
-- Always call super().\_\_init\_\_(log) in \_\_init\_\_ and super().\_\_del\_\_(log) in \_\_del\_\_.
-- Report the custom exceptions in the documentation
-- Use your own function with your own reported exception in a "try block".
-- Report the found exception using the following decision tree:
- <img src="assets/try_policy.svg" title="" style="zoom:70%;" />.
-- Report the exception in a message.
-- If you rised a warning, report if you tried to solve the problem.
-- If you rised an error, report if fix solve the problem.
-
-Limit the use of exceptions by using only exceptions from this list:
-- AssertionError
-- LookupError
-- StopAsyncIteration
-- ValueError
-- Warning
-
-Catch other exceptions using Exception as a wrapper
