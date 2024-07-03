@@ -23,6 +23,7 @@ Contents
 .. automodule:: common
    :members:
    :undoc-members:
+   :inherited-members:
    :show-inheritance:
 
 Usage
