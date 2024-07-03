@@ -85,6 +85,7 @@ fi
 # eseguibili particolari dell'ambiente creato
 pre_commit_cmd=".venv/bin/pre-commit"
 invoke_cmd=".venv/bin/invoke"
+sphinx_cmd=".venv/bin/sphinx-build"
 
 if ! "$pre_commit_cmd" install > /dev/null 2>&1; then
     echo -e "\e[31mERROR\e[0m: An error occurred while installing pre-commit-config.yaml"
@@ -147,8 +148,7 @@ if ! make --silent; then
 fi
 
 # generazione della documentazione
-export PATH=".venv/bin:$PATH"
-if ! make -C documents html; then
+if ! "$sphinx_cmd" -b html documents documents/_build/html; then
     echo -e "\e[31mERROR\e[0m: An error occurred while making documentation"
     "$python3_cmd" assets/finish_error.py
     exit 1
