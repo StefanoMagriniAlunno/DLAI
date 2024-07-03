@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "DLAI / just-one"
+project = "Just One"
 copyright = "2024, StefanoMagriniAlunno"  # TODO: mettere gli autori
 author = "StefanoMagriniAlunno"  # TODO: mettere gli autori
 release = "1.0.0"
