@@ -95,6 +95,12 @@ if [ ! -d "documents/sources/$PARENT_MODULE/$MODULE" ]; then
             .venv/bin/python3 assets/finish_error.py
             exit 1
         fi
+        # cambio ogni occorrenza di example in {MODULE} nel file {MODULE}.rst
+        if ! sed -i s/example/"$MODULE"/g documents/sources/"$PARENT_MODULE"/"$MODULE"/"$MODULE".rst ; then
+            echo -e "\e[31mERROR\e[0m: An error occurred while renaming the module in $MODULE.rst."
+            .venv/bin/python3 assets/finish_error.py
+            exit 1
+        fi
     fi
 fi
 
