@@ -10,7 +10,6 @@ and components used in the project.
    :caption: Contents:
 
    sources/main
-   sources/common/common
 
 Indices and tables
 ==================
