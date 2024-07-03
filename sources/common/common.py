@@ -9,8 +9,7 @@ class LogBase:
     """Base class for logging.
     When inherited, this class logs the initialization and deletion of the class.
 
-    Usage
-    ~~~~~
+    :emphasis:`usage`
 
     >>> class my_class(LogBase):
     ...     def __init__(self, logger: Logger):
@@ -48,11 +47,14 @@ def main() -> Logger:
 def tempgen(directory: str = "./temp") -> IO[bytes]:
     """This function manage temporary files in a directory
 
-    :params: directory (str, optional): directory with temporary files (default `./temp`).
+    :emphasis:`params`
+        - :attr:`directory` (str, optional): directory with temporary files (default `./temp`).
 
-    :returns: File name of the binary temporary file
+    :emphasis:`returns`
+        - File name of the binary temporary file
 
-    :raise: (Exception) directory not found
+    :emphasis:`raise`
+        - :exc:`Exception` directory not found
 
     """
     if not os.path.exists(directory):
