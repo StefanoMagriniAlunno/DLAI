@@ -12,10 +12,10 @@ Dependencies
 
 This module depends on the following Python standard libraries:
 
-- **logging**: Used to define the `logger` variable.
-- **os**: Used to check if the `temp` directory exists.
-- **tempfile**: Used to create a new temporary file.
-- **typing.IO**: Used to provide type hinting for temporary files.
+- :mod:`logging` used to define the `logger` variable.
+- :mod:`os` used to check if the `temp` directory exists.
+- :mod:`tempfile` used to create a new temporary file.
+- :mod:`typing` used to provide type hinting for temporary files.
 
 Contents
 ~~~~~~~~
