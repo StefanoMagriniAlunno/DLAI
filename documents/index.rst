@@ -9,8 +9,8 @@ and components used in the project.
    :maxdepth: 2
    :caption: Contents:
 
-   sources/common/common.rst
-   sources/main.rst
+   sources/main
+   sources/common/common
 
 Indices and tables
 ==================
