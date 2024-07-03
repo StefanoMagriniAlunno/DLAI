@@ -1,14 +1,28 @@
 # Description: JustOne game implementation.
 import random
 from abc import abstractmethod
+from logging import Logger
 from typing import List, Set, Tuple
 
 import jellyfish
-from common import Logger, LoggerSupport
+from common import LogBase
 from nltk.corpus import wordnet
 
 
-class Player(LoggerSupport):
+class Player(LogBase):
+    """Player interface
+
+    Methods
+    ~~~~~~~
+
+        - hint(word: str) -> str: get a hint from the player
+
+        - answer(words: Set[str]) -> str: get an answer from the player
+
+        - __str__() -> str: get the string representation of the player
+
+    """
+
     @abstractmethod
     def __str__(self):
         raise NotImplementedError
@@ -22,16 +36,19 @@ class Player(LoggerSupport):
         raise NotImplementedError
 
 
-class JustOne(LoggerSupport):
+class JustOne(LogBase):
     """Environment that manage the game
 
     Attributes
-    ---
+    ~~~~~~~~~~
+
         players (List[Player]): list of callable objects
 
     Methods
-    ---
+    ~~~~~~~
+
         - bot(hints: List[str]) -> List[str]: bot function
+
         - play(n_turns: int) -> Tuple[List[Tuple[str, Set[str], str]], int]: play the game
 
     """
@@ -40,25 +57,20 @@ class JustOne(LoggerSupport):
         """Constructor of the class
 
         Params
-        ---
+        ~~~~~~
+
             - players (List[Player]): list of players objects
+
             - log (Logger): logger object
 
         Raise
-        ---
+        ~~~~~
+
             AssertionError: If the players are less than 2
 
-        Usage
-        ---
-            >>> game = JustOne([player1, player2], log)
         """
-        # set del logger
         super().__init__(log)
-
-        # assertion
         assert len(players) >= 2, "The number of players must be at least 2"
-
-        # init
         self.players = players
 
     def __del__(self):
@@ -68,25 +80,30 @@ class JustOne(LoggerSupport):
         """Play the game
 
         Params
-        ---
+        ~~~~~~
+
             n_turns (int): number of turns
 
         Returns
-        ---
+        ~~~~~~~
+
             Tuple[List[Tuple[str, Set[str], str]], int]: list of solutions and number of wins:
+
                 - solution (List[Tuple[str, Set[str], str]]): list of solutions:
+
                     - str: secret word
+
                     - Set[str]: list of hints
+
                     - str: answer
+
                 - wins (int): number of wins
 
         Raise
-        ---
+        ~~~~~
+
             ValueError: If n_turns is negative.
 
-        Usage
-        ---
-            >>> game.play(2)
         """
 
         if n_turns < 0:
@@ -94,56 +111,42 @@ class JustOne(LoggerSupport):
 
         solution: List[Tuple[str, Set[str], str]] = []
         for _ in range(n_turns):
-            # pesca una parola W dal vocabolario di nltk
             w: str = random.choice(list(wordnet.words()))
-            # sceglie un giocatore A (che dovrà indovinare la parola)
             A = random.choice(self.players)
-            # hint su tutti gli altri giocatori con la parola W
             hints = [p.hint(w) for p in self.players if p != A]
-            # bot sulle parole per fornire un set finale da dare ad A
             words = self.bot(w, hints)
-            # answer su A con l'elenco delle parole
             ans = A.answer(words)
-            # confronto w e ans
             solution.append((w, words, ans))
-        # ritorno solution, numero di vincite
         return solution, sum([1 for w, _, ans in solution if w == ans])
 
     def bot(self, secret_word: str, hints: List[str]) -> Set[str]:
         """Bot function
 
         Params
-        ---
+        ~~~~~~
+
             - secret_word (str): secret word
+
             - hints (List[str]): list of hints
 
         Return
-        ---
+        ~~~~~~
+
             Set[str]: list of words
 
-        Usage
-        ---
-            >>> game.bot(word, ["hint1", "hint2"])
         """
-        # primo filtro: elimino gli hint che non sono nel dizionario
         hints_filtered = [hint for hint in hints if hint in wordnet.words()]
-        # secondo filtro: elimino gli hint che hanno un fonema simile a quello di secret_word
         hints_filtered = [
             hint
             for hint in hints_filtered
             if jellyfish.nysiis(hint) != jellyfish.nysiis(secret_word)
         ]
-        # terzo filtro: elimino gli hint che hanno un lemma simile a quello di secret_word
         hints_filtered = [
             hint
             for hint in hints_filtered
             if wordnet.morphy(hint) != wordnet.morphy(secret_word)
         ]
-
-        # trasformo tutti gli hint rimasti in una lista di lemmi
         lemmas = [wordnet.morphy(hint) for hint in hints_filtered]
-
-        # restituisco gli hint cui lemma ricorre una sola volta e non è None
         return set(
             [hint for hint in hints_filtered if lemmas.count(wordnet.morphy(hint)) == 1]
         )

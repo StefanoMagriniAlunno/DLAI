@@ -1,71 +1,94 @@
-human module
-=============
-
+Human module
+============
 
 Introduction
 ------------
 
-Description of the module.
+This module provides a set of classes that are commonly used in the project.
+It is available in all branches since it is defined in the `master` branch.
 
 Dependencies
 ~~~~~~~~~~~~
 
-Dependencies of the module.
+This module depends on the following Python standard libraries:
 
-YAML Configuration File
-~~~~~~~~~~~~~~~~~~~~~~~
-
-file yaml with the configuration of the module.
+- **logging**: Used to define the `logger` variable.
+- **os**: Used to check if the `temp` directory exists.
+- **tempfile**: Used to create a new temporary file.
+- **typing.IO**: Used to provide type hinting for temporary files.
 
 Contents
---------
-
-Defined Types
-~~~~~~~~~~~~~
-
-List of Defined Types
-
-Type1
-^^^^^
-
-Description and code of Type1
-
-Type2
-^^^^^
-
-Description and code of Type1
-
-Constants Defined
-~~~~~~~~~~~~~~~~~
-
-List of Constants Defined
-
-Functions Defined
-~~~~~~~~~~~~~~~~~
-
-List of Functions Defined
-
-Usage Examples
---------------
-
-Esempi di utilizzo del modulo e delle sue funzioni.
-
-Example1
 ~~~~~~~~
 
-Descrizione e codice di esempio1.
+.. automodule:: common
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-Example2
-~~~~~~~~
-
-Descrizione e codice di esempio2.
-
-Notes
+Usage
 -----
 
-Note aggiuntive e commenti sul modulo.
+1. log manager
+~~~~~~~~~~~~~~
 
-References
-----------
+The log file is `log/dev.log` and the format of log is:
 
-Riferimenti e link utili.
+TIME | PROCESS THREAD | LEVEL | PATH LINE : MEASSAGE
+
+We can use the following levels of logger:
+
+- DEBUG: level 0
+
+- INFO: level 1
+
+- WARNING: level 2
+
+- ERROR: level 3
+
+- CRITICAL: level 4
+
+1. simple warning
++++++++++++++++++
+
+.. code-block:: python
+
+   try:
+      raise ValueError('')
+   except ValueError as e:
+      logger.warning(f'ValueError {e} catched')
+   except Exception as e:
+      logger.error(f'Unknown Error {e}')
+      raise
+
+2. simple error
++++++++++++++++
+
+.. code-block:: python
+
+   try:
+      raise ValueError('')
+   except ValueError as e:
+      logger.error(f'ValueError {e}')
+      raise
+   except Exception as e:
+      logger.error(f'Unknown Error {e}')
+      raise
+
+3. simple critical
+++++++++++++++++++
+
+.. code-block:: python
+
+   try:
+      raise ValueError('')
+   except ValueError as e:
+      logger.warning(f'ValueError {e} catched')
+      try:
+         raise an Exception
+      except Exception:
+         logger.critical(f'An error occurred while recovering ValueError {e}')
+         exit(1)
+      logger.info(f'ValueError {e} recovered')
+   except Exception as e:
+      logger.error(f'Unknown Error {e}')
+      raise

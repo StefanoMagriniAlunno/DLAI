@@ -1,41 +1,23 @@
 # Description: Main file of the project. Not change its path!
 
 
-from common import Logger
+import common
 from game import JustOne
 from game.human import Human
 
-log = Logger()
+if __name__ == "__main__":
 
-try:
+    logger = common.main()
+
     game = JustOne(
         [
-            Human("Alice", log),
-            Human("Bob", log),
-            Human("Carl", log),
-            Human("David", log),
+            Human("Alice", logger),
+            Human("Bob", logger),
+            Human("Carl", logger),
+            Human("David", logger),
         ],
-        log,
+        logger,
     )
-    game.play(-2)
-except AssertionError:
-    # fix
-    try:
-        pass
-    except Exception as e:
-        log.fatal(f"unexpected exception detected: {e}")
-    # unsolved
-    log.error("AssertionError - unsolved")
-    raise
-except ValueError:
-    # fix
-    try:
-        game.play(2)
-    except Exception as e:
-        log.fatal(f"unexpected exception detected: {e}")
-    # solved
-    log.warning("ValueError - fixed")
-except Exception as e:
-    log.fatal(f"unexpected exception detected: {e}")
+    game.play(2)
 
-del log
+    del logger
