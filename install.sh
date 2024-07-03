@@ -19,8 +19,7 @@ if [ "$(lsb_release -si)" != "Ubuntu" ]; then
     exit 1
 fi
 if [ "$(lsb_release -sr)" != "22.04" ]; then
-    echo -e "\e[31mERROR\e[0m: This script is only for Ubuntu 22.04"
-    exit 1
+    echo -e "\e[31mWARNING\e[0m: This script is only for Ubuntu 22.04"
 fi
 # Che python_cmd sia python3.10.12
 if ! "$python_cmd" -c "import sys; print(sys.version_info[:3])" | grep -q "(3, 10, 12)"; then
