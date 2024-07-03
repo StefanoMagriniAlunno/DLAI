@@ -34,18 +34,14 @@ log manager
 
 The log file is `log/dev.log` and the format of log is:
 
-TIME | PROCESS THREAD | LEVEL | PATH LINE : MEASSAGE
+:emphasis:`TIME | PROCESS THREAD | LEVEL | PATH LINE : MEASSAGE``
 
 We can use the following levels of logger:
-- DEBUG: level 0
-
-- INFO: level 1
-
-- WARNING: level 2
-
-- ERROR: level 3
-
-- CRITICAL: level 4
+  1. :attr:`DEBUG`
+  2. :attr:`INFO`
+  3. :attr:`WARNING`
+  4. :attr:`ERROR`
+  5. :attr:`CRITICAL`
 
 1. simple warning
 +++++++++++++++++
