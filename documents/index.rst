@@ -10,8 +10,23 @@ and components used in the project.
    :caption: Contents:
 
    sources/main
-   sources/common/common
-   sources/justone/justone
+
+.. glossary::
+   :sorted:
+
+   Just One
+      A cooperative party game in which players work together to discover as many mystery words as possible.
+
+.. note::
+   The project is developed by students of the University of Rome "La Sapienza".
+
+   +--------------------------+---------------------------------------------+
+   | **Author**               | **Email**                                   |
+   +==========================+=============================================+
+   | Marcello Catacchini      | catacchini.xxxxxxx@studenti.uniroma1.it     |
+   +--------------------------+---------------------------------------------+
+   | Stefano Magrini Alunnno  | magrinialunno.1851728@studenti.uniroma1.it  |
+   +--------------------------+---------------------------------------------+
 
 Indices and tables
 ==================

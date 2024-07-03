@@ -8,7 +8,7 @@ Dependencies
 ~~~~~~~~~~~~
 
 Contents
-~~~~~~~~
+--------
 
 .. automodule:: example
    :members:

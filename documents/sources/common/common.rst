@@ -18,7 +18,7 @@ This module depends on the following Python standard libraries:
 - :mod:`typing` used to provide type hinting for temporary files.
 
 Contents
-~~~~~~~~
+--------
 
 .. automodule:: common
    :members:

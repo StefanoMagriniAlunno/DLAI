@@ -6,6 +6,7 @@ Justone module
    :caption: Contents:
 
    human/human
+   gpt/gpt
 
 Introduction
 ------------
@@ -25,7 +26,7 @@ This module depends on the following modules:
 - :mod:`nltk` for natural language processing.
 
 Contents
-~~~~~~~~
+--------
 
 .. automodule:: justone
    :members:

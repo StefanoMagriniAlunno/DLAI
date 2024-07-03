@@ -1,5 +1,5 @@
-human module
-============
+gpt module
+==============
 
 Introduction
 ------------
