@@ -1,6 +1,7 @@
 Main Script
 ===========
 
+
 This is the main script of the project, the software start here.
 To run this script open terminal and write:
 

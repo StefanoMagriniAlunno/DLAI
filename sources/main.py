@@ -1,13 +1,13 @@
 # Description: Main file of the project. Not change its path!
 
 
-import common
-from game import JustOne
-from game.human import Human
+from common import main
+from justone import JustOne
+from justone.human import Human
 
 if __name__ == "__main__":
 
-    logger = common.main()
+    logger = main()
 
     game = JustOne(
         [
@@ -20,4 +20,5 @@ if __name__ == "__main__":
     )
     game.play(2)
 
+    del game
     del logger

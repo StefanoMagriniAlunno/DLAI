@@ -11,7 +11,7 @@ and components used in the project.
 
    sources/main
    sources/common/common
-   sources/game/game
+   sources/justone/justone
 
 Indices and tables
 ==================

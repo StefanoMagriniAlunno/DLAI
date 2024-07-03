@@ -3,34 +3,20 @@ from logging import Logger
 from typing import Set
 
 from colorama import Fore, Style
-from game import Player
+from justone import Player
 
 
 class Human(Player):
     """Human player class
-
-    Attributes
-    ~~~~~~~~~~
-
-        name (str): The name of the player
-
-    Methods
-    ~~~~~~~
-
-        hint(word: str) -> str: Get a hint from the player
-        answer(words: Set[str]) -> str: Get an answer from the player
-        __str__() -> str: Get the string representation of the player
-
+    This class represents a human player. It implements the Player interface.
     """
 
     def __init__(self, name: str, log: Logger):
         """Create a human player
 
-        Params
-        ~~~~~~
-
-            name (str): The name of the player
-            log (Logger): The logger to use
+        :emphasis:`params`
+            - :attr:`name` (str): The name of the player
+            - :attr:`log` (Logger): The logger to use
 
         """
         super().__init__(log)
@@ -40,19 +26,7 @@ class Human(Player):
         super().__del__()
 
     def hint(self, word: str) -> str:
-        """Get a hint from the player
-
-        Params
-        ~~~~~~
-
-            word (str): The word to get a hint for
-
-        Returns
-        ~~~~~~~
-
-            str: The hint
-
-        """
+        """Get a hint from the player"""
         return input(
             Fore.BLUE
             + f"{self}"
@@ -69,19 +43,7 @@ class Human(Player):
         )
 
     def answer(self, words: Set[str]) -> str:
-        """Get an answer from the player
-
-        Params
-        ~~~~~~
-
-            words (Set[str]): The words to get an answer for
-
-        Returns
-        ~~~~~~~
-
-            str: The answer
-
-        """
+        """Get an answer from the player"""
         return input(
             Fore.BLUE
             + f"{self}"

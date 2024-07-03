@@ -10,16 +10,9 @@ from nltk.corpus import wordnet
 
 
 class Player(LogBase):
-    """Player interface
-
-    Methods
-    ~~~~~~~
-
-        - hint(word: str) -> str: get a hint from the player
-
-        - answer(words: Set[str]) -> str: get an answer from the player
-
-        - __str__() -> str: get the string representation of the player
+    """Player interface class
+    This class is an abstract class that defines the interface of the player.
+    Its methods must be implemented by the subclasses.
 
     """
 
@@ -38,35 +31,20 @@ class Player(LogBase):
 
 class JustOne(LogBase):
     """Environment that manage the game
-
-    Attributes
-    ~~~~~~~~~~
-
-        players (List[Player]): list of callable objects
-
-    Methods
-    ~~~~~~~
-
-        - bot(hints: List[str]) -> List[str]: bot function
-
-        - play(n_turns: int) -> Tuple[List[Tuple[str, Set[str], str]], int]: play the game
+    This class is responsible for managing the game. It receives the players and
+    plays the game.
 
     """
 
     def __init__(self, players: List[Player], log: Logger):
         """Constructor of the class
 
-        Params
-        ~~~~~~
+        :emphasis:`params`
+            - :attr:`players` (List[Player]): list of players objects
+            - :attr:`log` (Logger): logger object
 
-            - players (List[Player]): list of players objects
-
-            - log (Logger): logger object
-
-        Raise
-        ~~~~~
-
-            AssertionError: If the players are less than 2
+        :emphasis:`raise`:
+            - :exc:`AssertionError` if the players are less than 2
 
         """
         super().__init__(log)
@@ -79,30 +57,18 @@ class JustOne(LogBase):
     def play(self, n_turns: int) -> Tuple[List[Tuple[str, Set[str], str]], int]:
         """Play the game
 
-        Params
-        ~~~~~~
+        :emphasis:`params`
+            - :attr:`n_turns` (int): number of turns
 
-            n_turns (int): number of turns
+        :emphasis:`returns`
+            - :emphasis:`solution` (List[Tuple[str, Set[str], str]]): list of solutions
+                - :emphasis:`str`: secret word
+                - :emphasis:`Set[str]`: list of hints
+                - :emphasis:`str`: answer
+            - :emphasis:`wins` (int): number of wins
 
-        Returns
-        ~~~~~~~
-
-            Tuple[List[Tuple[str, Set[str], str]], int]: list of solutions and number of wins:
-
-                - solution (List[Tuple[str, Set[str], str]]): list of solutions:
-
-                    - str: secret word
-
-                    - Set[str]: list of hints
-
-                    - str: answer
-
-                - wins (int): number of wins
-
-        Raise
-        ~~~~~
-
-            ValueError: If n_turns is negative.
+        :emphasis:`raise`
+            - :exc:`ValueError` if n_turns is negative.
 
         """
 
@@ -122,17 +88,12 @@ class JustOne(LogBase):
     def bot(self, secret_word: str, hints: List[str]) -> Set[str]:
         """Bot function
 
-        Params
-        ~~~~~~
+        :emphasis:`params`
+            - :attr:`secret_word` (str): secret word
+            - :attr:`hints` (List[str]): list of hints
 
-            - secret_word (str): secret word
-
-            - hints (List[str]): list of hints
-
-        Return
-        ~~~~~~
-
-            Set[str]: list of words
+        :emphasis:`returns`
+            - :emphasis:`Set[str]`: list of words
 
         """
         hints_filtered = [hint for hint in hints if hint in wordnet.words()]

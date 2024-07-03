@@ -1,4 +1,4 @@
-from .common import LogBase, tempgen
-from .game import JustOne
+from .common import LogBase, main, tempgen
+from .justone import JustOne
 
-__all__ = ["LogBase", "tempgen", "JustOne"]
+__all__ = ["LogBase", "tempgen", "main", "JustOne"]
