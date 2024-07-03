@@ -1,3 +1,3 @@
-from .common import LogBase, tempgen
+from .common import LogBase, main, tempgen
 
-__all__ = ["LogBase", "tempgen"]
+__all__ = ["LogBase", "tempgen", "main"]

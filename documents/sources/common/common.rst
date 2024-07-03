@@ -28,8 +28,8 @@ Contents
 Usage
 -----
 
-1. log manager
-~~~~~~~~~~~~~~
+log manager
+~~~~~~~~~~~
 
 The log file is `log/dev.log` and the format of log is:
 

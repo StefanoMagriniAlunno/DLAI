@@ -115,7 +115,6 @@ mkdir -p "documents/_static"
 mkdir -p "documents/_templates"
 mkdir -p "documents/builds"
 touch "scripts/events/history.log"
-touch "logs/user.log"
 touch "logs/dev.log"
 
 mkdir -p "tools"
