@@ -1,5 +1,8 @@
 # flake8: noqa
 
+import os
+import sys
+
 from invoke import task  # type: ignore
 
 
@@ -18,17 +21,17 @@ def install(ctx):
         # "matplotlib",
         # "seaborn",
         # "scikit-learn",
-        # "torch torchvision torchaudio",
-        "nltk",
-        "jellyfish",
         "colorama",
+        "nltk jellyfish",
+        "transformers",
+        "torch torchvision torchaudio",
     ]
     for package in packages:
-        ctx.run(r"./.venv/bin/python3" + f" -m pip install {package}")
+        ctx.run(f"{sys.executable} -m pip install {package}")
 
 
 @task
-def download(ctx, unix_like=False):
+def download(ctx):
     """Download a file from a URL."""
     # url = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
     # path = "db/words_alpha.txt"
@@ -42,11 +45,8 @@ def download(ctx, unix_like=False):
     #        f"powershell -Command (New-Object Net.WebClient).DownloadFile('{url}', './data/{path}')"
     #     )
 
-    import os
-
     import nltk
 
-    directory = os.path.join(os.getcwd(), r".venv/share/nltk_data")
-    nltk.download("wordnet", download_dir=directory, quiet=True)
-    nltk.download("words", download_dir=directory, quiet=True)
-    nltk.download("punkt", download_dir=directory, quiet=True)
+    nltk.download(
+        "wordnet", download_dir=os.path.join(sys.prefix, r"share/nltk_data"), quiet=True
+    )

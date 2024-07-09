@@ -11,15 +11,15 @@ class Human(Player):
     This class represents a human player. It implements the Player interface.
     """
 
-    def __init__(self, name: str, log: Logger):
+    def __init__(self, logger: Logger, name: str):
         """Create a human player
 
         :emphasis:`params`
+            - :attr:`logger` (Logger): The logger to use
             - :attr:`name` (str): The name of the player
-            - :attr:`log` (Logger): The logger to use
 
         """
-        super().__init__(log)
+        super().__init__(logger)
         self.name = name
 
     def __del__(self):

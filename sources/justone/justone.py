@@ -34,22 +34,39 @@ class JustOne(LogBase):
     This class is responsible for managing the game. It receives the players and
     plays the game.
 
+    :emphasis:`attributes`
+        - :attr:`players` (List[Player]): list of players objects
+        - :attr:`model` (spacy.lang.en.English): spacy model
+        - :attr:`vocab` (List[str]): list of words
+
     """
 
-    def __init__(self, players: List[Player], log: Logger):
+    def __init__(self, logger: Logger, players: List[Player]):
         """Constructor of the class
 
         :emphasis:`params`
+            - :attr:`logger` (Logger): logger object
             - :attr:`players` (List[Player]): list of players objects
-            - :attr:`log` (Logger): logger object
 
         :emphasis:`raise`:
             - :exc:`AssertionError` if the players are less than 2
 
         """
-        super().__init__(log)
+        super().__init__(logger)
         assert len(players) >= 2, "The number of players must be at least 2"
         self.players = players
+        self.vocab = [
+            str(word)
+            for word in wordnet.words()
+            if str(word).isalpha()
+            and str(word).islower()
+            and wordnet.morphy(word) == word
+            and bool(wordnet.synsets(word, pos=wordnet.NOUN))
+            + bool(wordnet.synsets(word, pos=wordnet.VERB))
+            + bool(wordnet.synsets(word, pos=wordnet.ADJ))
+            + bool(wordnet.synsets(word, pos=wordnet.ADV))
+        ]
+        self.logger.debug(f"Vocabulary size: {len(self.vocab)}")
 
     def __del__(self):
         return super().__del__()
@@ -77,7 +94,7 @@ class JustOne(LogBase):
 
         solution: List[Tuple[str, Set[str], str]] = []
         for _ in range(n_turns):
-            w: str = random.choice(list(wordnet.words()))
+            w = random.choice(self.vocab)
             A = random.choice(self.players)
             hints = [p.hint(w) for p in self.players if p != A]
             words = self.bot(w, hints)
@@ -96,18 +113,26 @@ class JustOne(LogBase):
             - :emphasis:`Set[str]`: list of words
 
         """
-        hints_filtered = [hint for hint in hints if hint in wordnet.words()]
         hints_filtered = [
             hint
-            for hint in hints_filtered
-            if jellyfish.nysiis(hint) != jellyfish.nysiis(secret_word)
+            for hint in hints
+            if hint in wordnet.words()
+            and hint.isalpha()
+            and hint.islower()
+            and bool(wordnet.synsets(hint, pos=wordnet.NOUN))
+            + bool(wordnet.synsets(hint, pos=wordnet.VERB))
+            + bool(wordnet.synsets(hint, pos=wordnet.ADJ))
+            + bool(wordnet.synsets(hint, pos=wordnet.ADV))
+            and wordnet.morphy(hint) != wordnet.morphy(secret_word)
+            and jellyfish.nysiis(hint) != jellyfish.nysiis(secret_word)
         ]
-        hints_filtered = [
-            hint
-            for hint in hints_filtered
-            if wordnet.morphy(hint) != wordnet.morphy(secret_word)
-        ]
-        lemmas = [wordnet.morphy(hint) for hint in hints_filtered]
         return set(
-            [hint for hint in hints_filtered if lemmas.count(wordnet.morphy(hint)) == 1]
+            [
+                hint
+                for hint in hints_filtered
+                if hints_filtered.count(wordnet.morphy(hint)) == 1
+            ]
         )
+
+    def __str__(self):
+        return self.players
