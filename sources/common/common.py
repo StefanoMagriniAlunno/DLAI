@@ -35,7 +35,7 @@ class LogBase:
 def main() -> Logger:
     """Call this function to get the logger"""
     logging.basicConfig(
-        filename=os.path.join(os.path.dirname(__file__), r"../../logs/dev.log"),
+        filename=os.path.join(os.getcwd(), r"logs/dev.log"),
         filemode="w",
         format="%(asctime)-16s | %(processName)-16s %(threadName)-16s | %(levelname)-8s | %(pathname)s %(lineno)d : %(message)s",
         datefmt="%Y%m%d_%H%M%S",
