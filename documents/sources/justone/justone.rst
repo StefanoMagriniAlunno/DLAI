@@ -6,7 +6,7 @@ Justone module
    :caption: Contents:
 
    human/human
-   gpt/gpt
+   supervisor/supervisor
 
 Introduction
 ------------
