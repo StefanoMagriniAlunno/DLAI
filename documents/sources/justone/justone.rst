@@ -7,6 +7,7 @@ Justone module
 
    human/human
    supervisor/supervisor
+   llmbot/llmbot
 
 Introduction
 ------------
