@@ -62,6 +62,11 @@ def tempgen(directory: str = "./temp") -> IO[bytes]:
     return tempfile.NamedTemporaryFile(dir=directory)
 
 
+pypath: dict = {
+    "project": os.getcwd(),
+    "venv": os.getenv("VIRTUAL_ENV"),
+}
+
 if __name__ == "__main__":
     """A simple test for this module"""
     logger = main()
