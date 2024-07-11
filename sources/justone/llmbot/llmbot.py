@@ -5,7 +5,7 @@ from typing import Set
 
 import torch
 from justone import Player
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import GPT2ForQuestionAnswering, GPT2Tokenizer
 
 
 class LLMbot(Player):
@@ -15,11 +15,46 @@ class LLMbot(Player):
         logger: Logger,
     ):
         super().__init__(logger)
-        self.tokenizer = GPT2Tokenizer.from_pretrained(
-            os.path.join(os.getcwd(), r"data/db/gpt2/tokenizer"),
+
+        tokenizer_path = os.path.join(
+            os.getcwd(),
+            r"data/db/gpt2/tokenizer",
         )
-        self.model = GPT2LMHeadModel.from_pretrained(
-            os.path.join(os.getcwd(), r"data/db/gpt2/HeadModel"),
+        model_path = os.path.join(
+            os.getcwd(),
+            r"data/db/gpt2/model",
+        )
+
+        tokenizer_config_dir = tokenizer_path
+        # scorro tutte le sottodirectory alla ricerca di config.json
+        for root, dirs, files in os.walk(
+            tokenizer_path
+        ):  # pylint: disable=unused-variable
+            for file in files:
+                if file == "config.json":
+                    tokenizer_config_dir = root
+                    break
+            if tokenizer_config_dir != tokenizer_path:
+                break
+        if tokenizer_config_dir == tokenizer_path:
+            raise FileNotFoundError(f"config.json not found in {tokenizer_path}")
+        self.tokenizer = GPT2Tokenizer.from_pretrained(
+            tokenizer_config_dir,
+        )
+
+        model_config_dir = model_path
+        # scorro tutte le sottodirectory (e tutte quelle dentro) alla ricerca di config.json
+        for root, dirs, files in os.walk(model_path):  # pylint: disable=unused-variable
+            for file in files:
+                if file == "config.json":
+                    model_config_dir = root
+                    break
+            if model_config_dir != model_path:
+                break
+        if model_config_dir == model_path:
+            raise FileNotFoundError(f"config.json not found in {model_path}")
+        self.model = GPT2ForQuestionAnswering.from_pretrained(
+            model_config_dir,
         )
 
         # inizializzo il modello
@@ -29,12 +64,15 @@ class LLMbot(Player):
     def __del__(self):
         super().__del__()
 
+    def eval(self):
+        self.model.eval()
+
     def hint(self, word: str) -> str:
         # il modello deve produrre una parola, per questo genera token fino ad ottenerne una
         # la generazione è casuale, per questo sceglie un token casuale da un set di possibile token
         # con la distribuzione di probabilità suggerita
 
-        # la frase passata sarà f'{word}'
+        # la frase passata sarà f'{word}?'
         raise NotImplementedError
 
     def answer(self, words: Set[str]) -> str:
