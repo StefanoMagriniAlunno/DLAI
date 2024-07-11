@@ -48,5 +48,20 @@ def download(ctx):
     import nltk
 
     nltk.download(
-        "wordnet", download_dir=os.path.join(sys.prefix, r"share/nltk_data"), quiet=True
+        "wordnet",
+        download_dir=os.path.join(os.getcwd(), r"cache/nltk_data"),
+        quiet=True,
+    )
+
+    from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+    GPT2Tokenizer.from_pretrained(
+        "gpt2",
+        cache_dir=os.path.join(os.getcwd(), r"cache/gpt2/tokenizer"),
+        force_download=True,
+    )
+    GPT2LMHeadModel.from_pretrained(
+        "gpt2",
+        cache_dir=os.path.join(os.getcwd(), r"cache/gpt2/HeadModel"),
+        force_download=True,
     )
