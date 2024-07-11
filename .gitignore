@@ -13,6 +13,5 @@ downloads.log
 data/
 logs/
 temp/
-cache/
 scripts/events/history.log
 documents/_build
