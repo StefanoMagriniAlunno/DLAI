@@ -1,7 +1,7 @@
 # Description: Human player definition
 import os
 from logging import Logger
-from typing import Set, Union
+from typing import Set
 
 import torch
 from justone import Player
@@ -13,10 +13,10 @@ class LLMbot(Player):
     def __init__(
         self,
         logger: Logger,
-        model_path: Union[str, None] = None,
+        reset: bool = False,
     ):
         super().__init__(logger)
-        if model_path is None:
+        if reset:
             # carico il modello pre-addestrato di default
             self.tokenizer = GPT2Tokenizer.from_pretrained(
                 "gpt2",
@@ -28,16 +28,18 @@ class LLMbot(Player):
             self.model = GPT2LMHeadModel.from_pretrained(
                 "gpt2",
                 cache_dir=os.path.join(
-                    str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/tokenizer"
+                    str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/HeadModel"
                 ),
                 force_download=True,
             )
         else:
             # carico dalla path indicata
-            if not os.path.exists(model_path):
-                raise NotADirectoryError
-            self.tokenizer = GPT2Tokenizer.from_pretrained(model_path)
-            self.model = GPT2LMHeadModel.from_pretrained(model_path)
+            self.tokenizer = GPT2Tokenizer.from_pretrained(
+                os.path.join(str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/tokenizer")
+            )
+            self.model = GPT2LMHeadModel.from_pretrained(
+                os.path.join(str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/HeadModel")
+            )
         # inizializzo il modello
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
