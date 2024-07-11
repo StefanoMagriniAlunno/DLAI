@@ -127,12 +127,12 @@ echo -e "\e[32mSUCCESS\e[0m: base package installed"
 echo -e "\e[35mInstalling custom packages, wait a few minutes...\e[0m"
 
 # installo i pacchetti dinamici per il progetto
-if ! "$invoke_cmd" install 2> packages.log; then
+if ! "$invoke_cmd" install > packages.log 2>&1; then
     echo -e "\e[31mERROR\e[0m: An error occurred while installing packages"
     "$python3_cmd" assets/finish_error.py
     exit 1
 fi
-if ! "$invoke_cmd" download 2> downloads.log; then
+if ! "$invoke_cmd" download > downloads.log 2>&1; then
     echo -e "\e[31mERROR\e[0m: An error occurred while downloading data"
     "$python3_cmd" assets/finish_error.py
     exit 1
