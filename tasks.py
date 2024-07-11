@@ -49,7 +49,7 @@ def download(ctx):
 
     nltk.download(
         "wordnet",
-        download_dir=os.path.join(os.getcwd(), r"cache/nltk_data"),
+        download_dir=os.path.join(os.getcwd(), r"data/db/nltk_data"),
         quiet=True,
     )
 
@@ -57,11 +57,11 @@ def download(ctx):
 
     GPT2Tokenizer.from_pretrained(
         "gpt2",
-        cache_dir=os.path.join(os.getcwd(), r"cache/gpt2/tokenizer"),
+        cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/tokenizer"),
         force_download=True,
     )
     GPT2LMHeadModel.from_pretrained(
         "gpt2",
-        cache_dir=os.path.join(os.getcwd(), r"cache/gpt2/HeadModel"),
+        cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/HeadModel"),
         force_download=True,
     )

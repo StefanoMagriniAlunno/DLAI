@@ -13,33 +13,15 @@ class LLMbot(Player):
     def __init__(
         self,
         logger: Logger,
-        reset: bool = False,
     ):
         super().__init__(logger)
-        if reset:
-            # carico il modello pre-addestrato di default
-            self.tokenizer = GPT2Tokenizer.from_pretrained(
-                "gpt2",
-                cache_dir=os.path.join(
-                    str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/tokenizer"
-                ),
-                force_download=True,
-            )
-            self.model = GPT2LMHeadModel.from_pretrained(
-                "gpt2",
-                cache_dir=os.path.join(
-                    str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/HeadModel"
-                ),
-                force_download=True,
-            )
-        else:
-            # carico dalla path indicata
-            self.tokenizer = GPT2Tokenizer.from_pretrained(
-                os.path.join(str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/tokenizer")
-            )
-            self.model = GPT2LMHeadModel.from_pretrained(
-                os.path.join(str(os.getenv("VIRTUAL_ENV")), r"share/gpt2/HeadModel")
-            )
+        self.tokenizer = GPT2Tokenizer.from_pretrained(
+            os.path.join(os.getcwd(), r"data/db/gpt2/tokenizer"),
+        )
+        self.model = GPT2LMHeadModel.from_pretrained(
+            os.path.join(os.getcwd(), r"data/db/gpt2/HeadModel"),
+        )
+
         # inizializzo il modello
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
