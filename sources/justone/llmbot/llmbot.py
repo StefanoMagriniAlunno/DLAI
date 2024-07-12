@@ -5,7 +5,7 @@ from typing import Set
 
 import torch
 from justone import Player
-from transformers import GPT2ForQuestionAnswering, GPT2Tokenizer
+from transformers import GPT2PreTrainedModel, GPT2Tokenizer
 
 
 class LLMbot(Player):
@@ -53,7 +53,7 @@ class LLMbot(Player):
                 break
         if model_config_dir == model_path:
             raise FileNotFoundError(f"config.json not found in {model_path}")
-        self.model = GPT2ForQuestionAnswering.from_pretrained(
+        self.model = GPT2PreTrainedModel.from_pretrained(
             model_config_dir,
         )
 

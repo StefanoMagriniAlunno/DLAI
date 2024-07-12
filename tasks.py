@@ -53,13 +53,13 @@ def download(ctx):
         quiet=True,
     )
 
-    from transformers import GPT2ForQuestionAnswering, GPT2Tokenizer
+    from transformers import GPT2PreTrainedModel, GPT2Tokenizer
 
     GPT2Tokenizer.from_pretrained(
         "gpt2",
         cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/tokenizer"),
     )
-    GPT2ForQuestionAnswering.from_pretrained(
+    GPT2PreTrainedModel.from_pretrained(
         "gpt2",
         cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/model"),
     )
