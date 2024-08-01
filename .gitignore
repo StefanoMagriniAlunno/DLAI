@@ -15,3 +15,4 @@ logs/
 temp/
 scripts/events/history.log
 documents/_build
+repo/

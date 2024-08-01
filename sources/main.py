@@ -1,34 +1,25 @@
 import torch
-from common import main
-from justone.llmbot import LLMbot
+from transformers import GPT2ForQuestionAnswering, GPT2Tokenizer
 
-torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Load pre-trained model and tokenizer
+model = GPT2ForQuestionAnswering.from_pretrained("gpt2")
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
-logger = main()
+# Encode text
+context = "the secret word on their boards. All clues are revealed simultaneously, and any duplicate clues are discarded. However, if a clue matches the secret word, it cannot be discarded and must be considered by the guesser to avoid confusion. The guesser then tries to guess the secret word based on the remaining unique clues. Correct guesses earn points, while incorrect guesses do not. The game continues for a set number of rounds or until all cards are used, and the team with the most points wins."
+question = "What is your one hint related to 'house' ?"
 
-mybot = LLMbot(logger)
-mybot.eval()
+# Encode context and question
+input = tokenizer.encode_plus(question, context, return_tensors="pt")
 
-question = "What is the capital of France?"
-context = "France is a country in Europe. The capital of France is Paris."
+# Get answer
+outputs = model(**input)
 
-inputs = mybot.tokenizer(question, context, return_tensors="pt")
+start_index = torch.argmax(outputs.start_logits)
+end_index = torch.argmax(outputs.end_logits) + 1
 
-# sposto su gpu se disponibile
-inputs.to(mybot.device)
+answer = tokenizer.convert_tokens_to_string(
+    tokenizer.convert_ids_to_tokens(input["input_ids"][0][start_index:end_index])
+)
 
-with torch.no_grad():
-    outputs = mybot.model(**inputs)
-
-start_logits = outputs.start_logits
-end_logits = outputs.end_logits
-
-start_index = torch.argmax(start_logits)
-end_index = torch.argmax(end_logits)
-
-tokens = inputs.input_ids[0][start_index : end_index + 1]
-answer = mybot.tokenizer.decode(tokens)
-
-print(f"Answer: {answer}")
-
-del mybot
+print(answer)

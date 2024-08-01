@@ -23,11 +23,12 @@ def install(ctx):
         # "scikit-learn",
         "colorama",
         "nltk jellyfish",
-        "transformers",
-        "torch torchvision torchaudio",
+        "transformers deepspeed accelerate sentencepiece",
+        "huggingface_hub" "torch torchvision torchaudio",
     ]
     for package in packages:
         ctx.run(f"{sys.executable} -m pip install {package}")
+    ctx.run(f"{sys.executable} -m pip install --upgrade huggingface_hub")
 
 
 @task
@@ -53,13 +54,15 @@ def download(ctx):
         quiet=True,
     )
 
-    from transformers import GPT2PreTrainedModel, GPT2Tokenizer
+    from transformers import GPT2Config, GPT2Model, GPT2Tokenizer
 
     GPT2Tokenizer.from_pretrained(
         "gpt2",
         cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/tokenizer"),
     )
-    GPT2PreTrainedModel.from_pretrained(
-        "gpt2",
-        cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/model"),
+    GPT2Model.from_pretrained(
+        "gpt2", cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/model")
+    )
+    GPT2Config.from_pretrained(
+        "gpt2", cache_dir=os.path.join(os.getcwd(), r"data/db/gpt2/config")
     )

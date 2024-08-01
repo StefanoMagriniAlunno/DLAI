@@ -15,3 +15,14 @@
 
 **L'addestramento**
     - Reinforcement learning -> fine tuning / tuning (dipende dal giocatore)
+
+
+
+
+
+
+
+note di implementazione:
+l'addestramento passa attrevo una simulazione del gioco che avviene su CPU (a causa del fatto che le parole sono su RAM)
+per questa ragione abbiamo una coda di processi che sono quelli del batch, la cpu cercherà di smaltirli il più possibile registrando quindi la loss risultante.
+al termine su gpu avviene l'aggiornamento dei parametri.
